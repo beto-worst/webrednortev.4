@@ -9,6 +9,15 @@ function extractField(html, key) {
   return match ? match[1] : '';
 }
 
+// El campo agentLogoUrl no trae el sufijo de tamaño ("l" = large) que sí usa
+// NOCNOK al renderizar la imagen en su propio sitio; sin él, S3 responde 403.
+function toDisplayableImageUrl(url) {
+  if (!url) return '';
+  const dot = url.lastIndexOf('.');
+  if (dot === -1) return url;
+  return url.slice(0, dot) + 'l' + url.slice(dot);
+}
+
 export default async function handler(req, res) {
   const code = String(req.query.code || '').trim();
   if (!code) {
@@ -34,7 +43,7 @@ export default async function handler(req, res) {
         name,
         phone: extractField(html, 'agentPhoneNumber'),
         email: extractField(html, 'agentEmail'),
-        photo: extractField(html, 'agentLogoUrl'),
+        photo: toDisplayableImageUrl(extractField(html, 'agentLogoUrl')),
         company: extractField(html, 'companyName')
       }
     });
