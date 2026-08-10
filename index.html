@@ -1381,7 +1381,7 @@ body{top:0 !important;}
  </div>
  </div>
  <div class="crm-indicator" style="margin:1rem 2rem 0;">
- <span class="crm-dot"></span> Inventario actualizado desde CRM &nbsp;·&nbsp; Última sincronización: hace 3 min
+ <span class="crm-dot"></span> Inventario actualizado
  </div>
  <div class="propiedades-layout">
  <!-- FILTERS -->
@@ -1435,7 +1435,11 @@ body{top:0 !important;}
  <div class="props-count" id="props-count"><strong>48 propiedades</strong> encontradas</div>
  <div class="props-sort">
  <label>Ordenar:</label>
- <select><option>Más recientes</option><option>Precio: menor a mayor</option><option>Precio: mayor a menor</option></select>
+ <select id="props-sort" onchange="applyPropSort(this.value)">
+ <option value="recientes">Más recientes</option>
+ <option value="precio-asc">Precio: menor a mayor</option>
+ <option value="precio-desc">Precio: mayor a menor</option>
+ </select>
  </div>
  </div>
  <div class="props-grid" id="all-props"></div>
@@ -3357,7 +3361,13 @@ function renderProps(containerId, count) {
 
 let propsCurrentPage = 1;
 let propsFiltered = null; // null = sin filtros activos, usa 'properties' completo
+let propsSort = 'recientes';
 const PROPS_PER_PAGE = 12;
+
+function applyPropSort(value) {
+ propsSort = value;
+ renderPropsPage(1);
+}
 
 function getVal(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
 
@@ -3399,7 +3409,9 @@ function clearPropFilters() {
 function renderPropsPage(page) {
  const el = document.getElementById('all-props');
  if (!el) return;
- const list = propsFiltered !== null ? propsFiltered : properties;
+ const list = (propsFiltered !== null ? propsFiltered : properties).slice();
+ if (propsSort === 'precio-asc') list.sort((a, b) => a.rawPrice - b.rawPrice);
+ else if (propsSort === 'precio-desc') list.sort((a, b) => b.rawPrice - a.rawPrice);
  const totalPages = Math.max(1, Math.ceil(list.length / PROPS_PER_PAGE));
  propsCurrentPage = Math.min(Math.max(1, page), totalPages);
  const start = (propsCurrentPage - 1) * PROPS_PER_PAGE;
