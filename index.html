@@ -471,7 +471,8 @@ footer { background: var(--negro); color: rgba(255,255,255,0.7); }
 }
 .filters-panel {
  background: white; border-radius: 14px; border: 1px solid var(--gris-claro);
- padding: 1.5rem; height: fit-content; position: sticky; top: 88px;
+ padding: 1.5rem; position: sticky; top: 88px;
+ max-height: calc(100vh - 112px); overflow-y: auto;
 }
 .filters-panel h3 { font-size: 14px; font-weight: 700; color: var(--negro); margin-bottom: 1.25rem; }
 .filter-group { margin-bottom: 1.25rem; }
@@ -926,7 +927,7 @@ footer { background: var(--negro); color: rgba(255,255,255,0.7); }
  .nosotros-grid { grid-template-columns: 1fr; }
  .footer-top { grid-template-columns: 1fr 1fr; }
  .propiedades-layout { grid-template-columns: 1fr; }
- .filters-panel { position: static; }
+ .filters-panel { position: static; max-height: none; overflow-y: visible; }
  .prop-detail-grid { grid-template-columns: 1fr; }
  .prop-features-grid { grid-template-columns: repeat(2, 1fr); }
  .stats-row { grid-template-columns: repeat(2, 1fr); }
