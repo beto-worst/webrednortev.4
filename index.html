@@ -286,6 +286,26 @@ section { padding: 5rem 0; }
 .prop-feat { font-size: 12px; color: var(--cafe); display: flex; align-items: center; gap: 4px; font-weight: 500; }
 .prop-feat span { font-size: 16px; }
 
+/* Carrusel de propiedades destacadas */
+.props-carousel-wrap { position: relative; }
+.props-carousel {
+ display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory;
+ scroll-behavior: smooth; padding-bottom: 0.5rem; -webkit-overflow-scrolling: touch;
+}
+.props-carousel::-webkit-scrollbar { height: 6px; }
+.props-carousel::-webkit-scrollbar-thumb { background: var(--gris-claro); border-radius: 10px; }
+.props-carousel .prop-card { flex: 0 0 320px; scroll-snap-align: start; }
+.carousel-nav-btn {
+ position: absolute; top: 50%; transform: translateY(-50%);
+ width: 42px; height: 42px; border-radius: 50%; background: white;
+ border: 1px solid var(--gris-claro); box-shadow: 0 4px 14px var(--sombra-md);
+ display: flex; align-items: center; justify-content: center;
+ cursor: pointer; font-size: 1.2rem; color: var(--negro); z-index: 5;
+}
+.carousel-nav-btn.prev { left: -18px; }
+.carousel-nav-btn.next { right: -18px; }
+@media (max-width: 900px) { .carousel-nav-btn { display: none; } }
+
 /* CRM badge */
 .crm-tag {
  display: inline-flex; align-items: center; gap: 4px;
@@ -1156,7 +1176,11 @@ body{top:0 !important;}
  <span class="crm-tag"><span class="crm-dot"></span> Datos en tiempo real del CRM</span>
  <a style="font-size:14px;font-weight:600;color:var(--terracota);text-decoration:none;cursor:pointer;" onclick="navTo('propiedades')">Ver todo el inventario →</a>
  </div>
- <div class="props-grid" id="featured-props"></div>
+ <div class="props-carousel-wrap">
+ <button class="carousel-nav-btn prev" onclick="scrollFeaturedCarousel(-1)" aria-label="Anteriores">‹</button>
+ <div class="props-carousel" id="featured-props"></div>
+ <button class="carousel-nav-btn next" onclick="scrollFeaturedCarousel(1)" aria-label="Siguientes">›</button>
+ </div>
  </div>
  </section>
 
@@ -3124,10 +3148,18 @@ async function fetchLiveProperties() {
  }
  propsCurrentPage = 1;
  if (typeof propsFiltered !== 'undefined') propsFiltered = null;
- ['featured-props','similar-props'].forEach(id => {
- if (document.getElementById(id)) renderProps(id, 3);
- });
+ if (document.getElementById('featured-props')) renderProps('featured-props', 10);
+ if (document.getElementById('similar-props')) renderProps('similar-props', 3);
  if (document.getElementById('all-props')) renderPropsPage(1);
+}
+
+// ---- CARRUSEL DE PROPIEDADES DESTACADAS ----
+function scrollFeaturedCarousel(dir) {
+ const el = document.getElementById('featured-props');
+ if (!el) return;
+ const card = el.querySelector('.prop-card');
+ const step = card ? card.getBoundingClientRect().width + 24 : 340;
+ el.scrollBy({ left: dir * step, behavior: 'smooth' });
 }
 
 // ---- CARRUSEL EN TARJETAS ----
