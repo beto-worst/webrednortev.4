@@ -988,7 +988,6 @@ body{top:0 !important;}
  <a onclick="navTo('contacto')" id="nav-contacto">Contacto</a>
  </nav>
  <div class="nav-cta">
- <button class="btn-valua" onclick="navTo('valuacion')">Estima el valor de tu propiedad</button>
  <a class="btn-wa-nav" href="https://wa.me/528117783953" target="_blank">
  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
  Hablar por WhatsApp
@@ -1007,7 +1006,6 @@ body{top:0 !important;}
  <a onclick="navTo('insides');toggleMenu()">Insights</a>
  <a onclick="navTo('nosotros');toggleMenu()">Nosotros</a>
  <a onclick="navTo('contacto');toggleMenu()">Contacto</a>
- <button class="btn-valua" onclick="navTo('valuacion');toggleMenu()">Estima el valor de tu propiedad</button>
  <a class="btn-wa-nav" href="https://wa.me/528117783953" target="_blank"> Hablar por WhatsApp</a>
 </div>
 
@@ -1101,48 +1099,48 @@ body{top:0 !important;}
  <div class="search-grid">
  <div class="search-field">
  <label>Tipo de propiedad</label>
- <select>
- <option>Todos</option>
- <option>Casa</option>
- <option>Departamento</option>
- <option>Local comercial</option>
- <option>Bodega industrial</option>
- <option>Terreno</option>
+ <select id="hero-tipo">
+ <option value="">Todos</option>
+ <option value="Casa">Casa</option>
+ <option value="Depto">Departamento</option>
+ <option value="Local">Local comercial</option>
+ <option value="Bodega">Bodega industrial</option>
+ <option value="Terreno">Terreno</option>
  </select>
  </div>
  <div class="search-field">
  <label>Municipio / Zona</label>
- <select>
- <option>Todos</option>
- <option>San Pedro Garza García</option>
- <option>Monterrey Centro</option>
- <option>San Nicolás</option>
- <option>Guadalupe</option>
- <option>Santa Catarina</option>
+ <select id="hero-zona">
+ <option value="">Todos</option>
+ <option value="San Pedro Garza García">San Pedro Garza García</option>
+ <option value="Monterrey">Monterrey Centro</option>
+ <option value="San Nicolás">San Nicolás</option>
+ <option value="Guadalupe">Guadalupe</option>
+ <option value="Santa Catarina">Santa Catarina</option>
  </select>
  </div>
  <div class="search-field">
  <label>Precio máximo</label>
- <select>
- <option>Sin límite</option>
- <option>Hasta $2M</option>
- <option>Hasta $5M</option>
- <option>Hasta $10M</option>
- <option>Hasta $20M</option>
+ <select id="hero-precio">
+ <option value="">Sin límite</option>
+ <option value="2000000">Hasta $2M</option>
+ <option value="5000000">Hasta $5M</option>
+ <option value="10000000">Hasta $10M</option>
+ <option value="20000000">Hasta $20M</option>
  </select>
  </div>
  <div class="search-field">
  <label>Recámaras</label>
- <select>
- <option>Cualquiera</option>
- <option>1+</option>
- <option>2+</option>
- <option>3+</option>
- <option>4+</option>
+ <select id="hero-recamaras">
+ <option value="0">Cualquiera</option>
+ <option value="1">1+</option>
+ <option value="2">2+</option>
+ <option value="3">3+</option>
+ <option value="4">4+</option>
  </select>
  </div>
  </div>
- <button class="btn-search" onclick="navTo('propiedades')">Ver propiedades disponibles</button>
+ <button class="btn-search" onclick="searchHeroProperties()">Ver propiedades disponibles</button>
  </div>
  </div>
  </section>
@@ -3460,9 +3458,36 @@ function navTo(page) {
 fetchLiveProperties();
 
 // ---- SEARCH TABS ----
+let heroSearchOp = 'Venta';
 function setSearchTab(el, val) {
  document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
  el.classList.add('active');
+ heroSearchOp = val;
+}
+
+function searchHeroProperties() {
+ const fOp = document.getElementById('f-operacion');
+ const fTipo = document.getElementById('f-tipo');
+ const fZona = document.getElementById('f-zona');
+ const fPrecioMin = document.getElementById('f-precio-min');
+ const fPrecioMax = document.getElementById('f-precio-max');
+ const fRecamaras = document.getElementById('f-recamaras');
+ const fBanos = document.getElementById('f-banos');
+ const fM2Min = document.getElementById('f-m2-min');
+ const fM2Max = document.getElementById('f-m2-max');
+
+ if (fOp) fOp.value = heroSearchOp;
+ if (fTipo) fTipo.value = getVal('hero-tipo');
+ if (fZona) fZona.value = getVal('hero-zona');
+ if (fPrecioMin) fPrecioMin.value = '';
+ if (fPrecioMax) fPrecioMax.value = getVal('hero-precio');
+ if (fRecamaras) fRecamaras.value = getVal('hero-recamaras');
+ if (fBanos) fBanos.value = '0';
+ if (fM2Min) fM2Min.value = '';
+ if (fM2Max) fM2Max.value = '';
+
+ applyPropFilters();
+ navTo('propiedades');
 }
 
 // ---- MOTIVO ----
