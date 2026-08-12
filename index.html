@@ -3240,7 +3240,7 @@ function clearAll() {
 // ─────────────────────────────────────────────
 //  CONFIGURACIÓN  ← edita solo estas dos líneas
 // ─────────────────────────────────────────────
-const WEBHOOK_URL  = 'PEGA_AQUI_TU_WEBHOOK_URL';
+const WEBHOOK_URL  = 'https://script.google.com/macros/s/AKfycbwElD41j5-r7CBnDEDTaVeLpqLcEX2D3r0yDNX9skw6zDnKF679SWwg00MafuFV1dQqIQ/exec';
 const ASESOR_EMAIL = 'asesor@rednorte.com';
 // ─────────────────────────────────────────────
 
@@ -3328,7 +3328,7 @@ function sendToWebhook(contact,scores,total){
     feedback_visitas:getOpt('p4_fb')||'',
     exclusiva:getOpt('p5_excl')||'',
   };
-  fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+  fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)})
     .then(r=>{
       const b=document.getElementById('send-banner');
       if(r.ok){ b.className='send-banner ok'; b.textContent='✓ Diagnóstico registrado. Un asesor Rednorte se pondrá en contacto contigo.'; }
