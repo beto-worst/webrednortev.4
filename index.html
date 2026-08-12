@@ -1007,7 +1007,7 @@ body{top:0 !important;}
  <a onclick="navTo('inicio')" id="nav-inicio" class="active">Inicio</a>
  <a onclick="navTo('propiedades')" id="nav-propiedades">Propiedades</a>
  <a onclick="navTo('servicios')" id="nav-servicios">Servicios</a>
- <a onclick="navTo('valuacion')" id="nav-herramientas">Herramientas</a>
+ <a onclick="navTo('herramientas')" id="nav-herramientas">Herramientas</a>
  <a onclick="navTo('insides')" id="nav-insides">Insights</a>
  <a onclick="navTo('nosotros')" id="nav-nosotros">Nosotros</a>
  <a onclick="navTo('contacto')" id="nav-contacto">Contacto</a>
@@ -1027,7 +1027,7 @@ body{top:0 !important;}
  <a onclick="navTo('inicio');toggleMenu()">Inicio</a>
  <a onclick="navTo('propiedades');toggleMenu()">Propiedades</a>
  <a onclick="navTo('servicios');toggleMenu()">Servicios</a>
- <a onclick="navTo('valuacion');toggleMenu()">Herramientas</a>
+ <a onclick="navTo('herramientas');toggleMenu()">Herramientas</a>
  <a onclick="navTo('insides');toggleMenu()">Insights</a>
  <a onclick="navTo('nosotros');toggleMenu()">Nosotros</a>
  <a onclick="navTo('contacto');toggleMenu()">Contacto</a>
@@ -1561,6 +1561,40 @@ body{top:0 !important;}
  <a class="btn-wa-nav" href="https://wa.me/528117783953" target="_blank" style="border-radius:10px;padding:0.85rem 1.5rem;font-size:14px;"> WhatsApp</a>
  </div>
  </div>
+ </div>
+ </div>
+ </div>
+</div>
+
+<!-- ===== HERRAMIENTAS (landing con las opciones disponibles) ===== -->
+<div class="page" id="page-herramientas">
+ <div class="page-content">
+ <div class="breadcrumb">
+ <div class="breadcrumb-inner">
+ <a onclick="navTo('inicio')">Inicio</a>
+ <span>›</span>
+ <span>Herramientas</span>
+ </div>
+ </div>
+ <div style="max-width:900px;margin:0 auto;padding:3rem 2rem 5rem;">
+ <div class="section-header center">
+ <p class="section-label">Herramientas gratuitas</p>
+ <h1 class="section-title">¿Qué necesitas hacer hoy?</h1>
+ <p class="section-sub">Elige la herramienta que mejor se ajuste a lo que necesitas. Ambas son gratuitas y el resultado es una estimación inicial, no sustituye un avalúo profesional.</p>
+ </div>
+ <div class="quick-links-grid">
+ <a class="quick-link-card" onclick="navTo('valuacion')">
+ <span class="quick-link-label">Valuación</span>
+ <h3>Estima el valor de tu propiedad</h3>
+ <p>Calcula un rango de precio de venta o renta con base en comparables de mercado, características y ubicación.</p>
+ <span class="quick-link-action">Iniciar valuación →</span>
+ </a>
+ <a class="quick-link-card" onclick="navTo('vendibilidad')">
+ <span class="quick-link-label">Diagnóstico</span>
+ <h3>Analiza qué tan vendible es tu propiedad</h3>
+ <p>Responde 25 preguntas sobre precio, presentación, exposición y conversión para identificar qué está frenando la venta.</p>
+ <span class="quick-link-action">Iniciar diagnóstico →</span>
+ </a>
  </div>
  </div>
  </div>
@@ -2750,7 +2784,7 @@ function clearAll() {
  </div>
  </div>
  <div class="nosotros-page">
- <div class="nosotros-hero-img"><img src="assets/equipo.jpg" alt="Equipo Rednorte Inmobiliaria" style="width:100%;height:auto;display:block;"></div>
+ <div class="nosotros-hero-img" style="text-align:center;"><img src="assets/equipo.jpg" alt="Equipo Rednorte Inmobiliaria" style="max-width:560px;width:100%;height:auto;display:inline-block;"></div>
  <p class="section-label">Quiénes somos</p>
  <h1 class="section-title">Rednorte Inmobiliaria</h1>
  <p style="font-size:1rem;color:var(--cafe);line-height:1.8;max-width:700px;margin-bottom:2rem;">Somos una empresa inmobiliaria con más de 15 años de presencia en el mercado de Nuevo León. Nació con el propósito de conectar a las personas con el inmueble correcto, en el momento indicado y al precio justo. Hoy somos uno de los equipos de confianza en la región para compra, venta, renta e inversión de propiedades residenciales, comerciales e industriales.</p>
@@ -2902,17 +2936,803 @@ function clearAll() {
  </div>
 </div>
 
+<!-- ===== VENDIBILIDAD (Diagnostico de Vendibilidad, integrada) ===== -->
 <div class="page" id="page-vendibilidad">
- <div class="page-content">
- <div class="not-found">
- <div class="not-found-inner">
- <h1 class="not-found-title">Reporte de vendibilidad</h1>
- <p class="not-found-desc">Esta herramienta está en construcción. Muy pronto podrás evaluar aquí qué tan vendible es tu propiedad.</p>
- <button class="btn-primary" onclick="navTo('inicio')">← Ir al inicio</button>
- </div>
- </div>
- </div>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display&display=swap');
+.ov-vendibilidad *, .ov-vendibilidad *::before, .ov-vendibilidad *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.ov-vendibilidad {
+    --red:#C4622D; --red-dark:#A04E22; --red-light:#F0DDD3; --red-mid:#A04E22;
+    --navy:#1a1208; --ink:#1C1C1C; --ink2:#4A4A4A; --ink3:#7A7A7A;
+    --line:#E0DDD8; --surface:#F8F6F3; --white:#FFFFFF;
+    --green:#2D6A3F; --amber:#A0570A; --radius:10px;
+  }
+.ov-vendibilidad { font-family:'Inter',sans-serif; background:var(--surface); color:var(--ink); min-height:100vh; line-height:1.6; }
+.ov-vendibilidad .site-header { background:var(--navy); padding:0 2rem; height:56px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
+.ov-vendibilidad .logo { font-family:'DM Serif Display',serif; font-size:18px; color:#fff; letter-spacing:.5px; }
+.ov-vendibilidad .logo span { color:#C8705F; }
+.ov-vendibilidad .header-tag { font-size:11px; color:rgba(255,255,255,.5); letter-spacing:1.5px; text-transform:uppercase; }
+.ov-vendibilidad .progress-track { height:3px; background:rgba(0,0,0,.08); position:sticky; top:56px; z-index:99; }
+.ov-vendibilidad .progress-fill { height:3px; background:var(--red); transition:width .5s ease; width:0%; }
+.ov-vendibilidad .container { max-width:720px; margin:0 auto; padding:0 1.25rem 4rem; }
+.ov-vendibilidad .hero { padding:3rem 0 2rem; border-bottom:1px solid var(--line); margin-bottom:2rem; }
+.ov-vendibilidad .hero-eyebrow { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--red); font-weight:500; margin-bottom:.75rem; }
+.ov-vendibilidad .hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(26px,5vw,36px); color:var(--navy); line-height:1.2; margin-bottom:.75rem; }
+.ov-vendibilidad .hero p { font-size:14px; color:var(--ink2); max-width:520px; line-height:1.7; }
+.ov-vendibilidad .pilares-pills { display:flex; flex-wrap:wrap; gap:6px; margin-top:1.25rem; }
+.ov-vendibilidad .pill { font-size:11px; padding:4px 10px; border-radius:20px; border:1px solid var(--line); color:var(--ink3); background:var(--white); font-weight:500; transition:all .2s; }
+.ov-vendibilidad .pill.done { background:var(--navy); color:#fff; border-color:var(--navy); }
+.ov-vendibilidad .pill.active-pill { background:var(--red-light); color:var(--red); border-color:var(--red); }
+.ov-vendibilidad .step-meta { display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; }
+.ov-vendibilidad .step-name { font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--red); }
+.ov-vendibilidad .step-count { font-size:12px; color:var(--ink3); }
+.ov-vendibilidad .pilar { display:none; }
+.ov-vendibilidad .pilar.active { display:block; }
+.ov-vendibilidad .pilar-title-bar { padding:1rem 1.25rem; border-radius:var(--radius) var(--radius) 0 0; border:1px solid transparent; }
+.ov-vendibilidad .pilar-title-bar h2 { font-size:15px; font-weight:600; margin-bottom:2px; }
+.ov-vendibilidad .pilar-title-bar p { font-size:12px; opacity:.75; }
+.ov-vendibilidad .p1 .pilar-title-bar { background:#F5ECEB; border-color:#DBBAB7; color:var(--red-dark); }
+.ov-vendibilidad .p2 .pilar-title-bar { background:#E8EEF6; border-color:#B9CADE; color:#1A3A5C; }
+.ov-vendibilidad .p3 .pilar-title-bar { background:#E7F2EA; border-color:#B6D4BC; color:#1B5C2A; }
+.ov-vendibilidad .p4 .pilar-title-bar { background:#FDF3E3; border-color:#E6C98A; color:#6B3A00; }
+.ov-vendibilidad .p5 .pilar-title-bar { background:#EEE9F5; border-color:#C8B8E0; color:#3A1472; }
+.ov-vendibilidad .questions-card { background:var(--white); border:1px solid var(--line); border-top:none; border-radius:0 0 var(--radius) var(--radius); overflow:hidden; }
+.ov-vendibilidad .q { padding:1.1rem 1.25rem; border-bottom:1px solid var(--line); }
+.ov-vendibilidad .q:last-child { border-bottom:none; }
+.ov-vendibilidad .q-num { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink3); margin-bottom:4px; }
+.ov-vendibilidad .q-text { font-size:14px; font-weight:500; color:var(--ink); line-height:1.5; margin-bottom:5px; }
+.ov-vendibilidad .q-hint { font-size:12px; color:var(--ink3); line-height:1.5; margin-bottom:.65rem; }
+.ov-vendibilidad .opts { display:flex; flex-wrap:wrap; gap:6px; }
+.ov-vendibilidad .opt { font-size:12px; padding:6px 13px; border-radius:20px; border:1px solid var(--line); cursor:pointer; background:var(--surface); color:var(--ink2); transition:all .15s; user-select:none; font-family:'Inter',sans-serif; font-weight:400; }
+.ov-vendibilidad .opt:hover { border-color:var(--red); color:var(--red); background:var(--red-light); }
+.ov-vendibilidad .opt.sel { background:var(--red); color:#fff; border-color:var(--red); font-weight:500; }
+.ov-vendibilidad .opt.multi.sel { background:var(--navy); border-color:var(--navy); color:#fff; }
+.ov-vendibilidad .opt.multi:hover { border-color:var(--navy); color:var(--navy); background:#EEF1F6; }
+.ov-vendibilidad .input-row { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.ov-vendibilidad .q-input { width:100%; font-size:13px; padding:8px 11px; border:1px solid var(--line); border-radius:7px; background:var(--surface); color:var(--ink); font-family:'Inter',sans-serif; outline:none; transition:border-color .15s; }
+.ov-vendibilidad .q-input:focus { border-color:var(--red); background:var(--white); }
+.ov-vendibilidad .q-input::placeholder { color:var(--ink3); }
+.ov-vendibilidad .nav-bar { display:flex; align-items:center; gap:10px; margin-top:1.5rem; }
+.ov-vendibilidad .btn { font-family:'Inter',sans-serif; font-size:13px; font-weight:500; padding:9px 22px; border-radius:8px; cursor:pointer; border:1px solid var(--line); background:var(--white); color:var(--ink); transition:all .15s; }
+.ov-vendibilidad .btn:hover { background:var(--surface); }
+.ov-vendibilidad .btn:disabled { opacity:.35; cursor:default; }
+.ov-vendibilidad .btn.primary { background:var(--red); color:#fff; border-color:var(--red); }
+.ov-vendibilidad .btn.primary:hover { background:var(--red-mid); }
+.ov-vendibilidad .answers-chip { margin-left:auto; font-size:12px; color:var(--ink3); background:var(--surface); border:1px solid var(--line); padding:5px 12px; border-radius:20px; }
+.ov-vendibilidad #capture-screen { display:none; padding-top:2rem; }
+.ov-vendibilidad .capture-card { background:var(--white); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
+.ov-vendibilidad .capture-header { padding:1.25rem 1.5rem; border-bottom:1px solid var(--line); background:var(--navy); }
+.ov-vendibilidad .capture-header h2 { font-family:'DM Serif Display',serif; font-size:20px; color:#fff; margin-bottom:4px; }
+.ov-vendibilidad .capture-header p { font-size:13px; color:rgba(255,255,255,.6); line-height:1.6; }
+.ov-vendibilidad .capture-body { padding:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.ov-vendibilidad .field-group { display:flex; flex-direction:column; gap:5px; }
+.ov-vendibilidad .field-group.full { grid-column:1/-1; }
+.ov-vendibilidad .field-label { font-size:11px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; color:var(--ink3); }
+.ov-vendibilidad .field-input { font-size:14px; padding:10px 13px; border:1px solid var(--line); border-radius:8px; background:var(--surface); color:var(--ink); font-family:'Inter',sans-serif; outline:none; transition:border-color .15s; }
+.ov-vendibilidad .field-input:focus { border-color:var(--red); background:var(--white); }
+.ov-vendibilidad .field-input::placeholder { color:var(--ink3); }
+.ov-vendibilidad .capture-footer { padding:1.25rem 1.5rem; border-top:1px solid var(--line); display:flex; align-items:flex-start; gap:12px; flex-wrap:wrap; }
+.ov-vendibilidad .privacy-note { font-size:11px; color:var(--ink3); line-height:1.5; flex:1; min-width:200px; }
+.ov-vendibilidad .error-msg { font-size:12px; color:var(--red); margin-bottom:6px; display:none; }
+.ov-vendibilidad .result { display:none; }
+.ov-vendibilidad .result.active { display:block; padding-top:2rem; }
+.ov-vendibilidad .result-hero { padding:2rem 0 1.5rem; border-bottom:1px solid var(--line); margin-bottom:1.75rem; }
+.ov-vendibilidad .result-hero .eyebrow { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--red); font-weight:600; margin-bottom:.5rem; }
+.ov-vendibilidad .result-hero h2 { font-family:'DM Serif Display',serif; font-size:clamp(22px,4vw,30px); color:var(--navy); line-height:1.2; margin-bottom:.6rem; }
+.ov-vendibilidad .result-hero p { font-size:14px; color:var(--ink2); max-width:500px; line-height:1.7; }
+.ov-vendibilidad .gauge-card { background:var(--white); border:1px solid var(--line); border-radius:var(--radius); padding:1.5rem; display:flex; align-items:center; gap:1.5rem; margin-bottom:1rem; }
+.ov-vendibilidad .gauge-score { font-family:'DM Serif Display',serif; font-size:64px; line-height:1; min-width:90px; text-align:center; }
+.ov-vendibilidad .gauge-of { font-size:13px; color:var(--ink3); text-align:center; margin-top:2px; }
+.ov-vendibilidad .gauge-right { flex:1; }
+.ov-vendibilidad .gauge-label { font-size:13px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; }
+.ov-vendibilidad .gauge-text { font-size:14px; color:var(--ink2); line-height:1.65; }
+.ov-vendibilidad .gauge-bar-wrap { margin:.75rem 0 0; }
+.ov-vendibilidad .gauge-bar-bg { height:6px; background:var(--surface); border-radius:3px; overflow:hidden; border:1px solid var(--line); }
+.ov-vendibilidad .gauge-bar-fill { height:6px; border-radius:3px; transition:width 1s ease; }
+.ov-vendibilidad .pilares-result-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:8px; margin-bottom:1.25rem; }
+.ov-vendibilidad .pr-card { background:var(--white); border:1px solid var(--line); border-radius:var(--radius); padding:.9rem 1rem; }
+.ov-vendibilidad .pr-name { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.8px; color:var(--ink3); margin-bottom:4px; }
+.ov-vendibilidad .pr-num { font-size:28px; font-weight:600; line-height:1; margin-bottom:3px; }
+.ov-vendibilidad .pr-tag { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.8px; margin-bottom:7px; }
+.ov-vendibilidad .pr-bar-bg { height:4px; background:var(--surface); border-radius:2px; overflow:hidden; }
+.ov-vendibilidad .pr-bar-fill { height:4px; border-radius:2px; transition:width 1s ease; }
+.ov-vendibilidad .section-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink3); margin:1.5rem 0 .75rem; }
+.ov-vendibilidad .frenos-card { background:var(--white); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; margin-bottom:1.25rem; }
+.ov-vendibilidad .freno { display:flex; gap:1rem; padding:1rem 1.25rem; border-bottom:1px solid var(--line); align-items:flex-start; }
+.ov-vendibilidad .freno:last-child { border-bottom:none; }
+.ov-vendibilidad .freno-n { font-family:'DM Serif Display',serif; font-size:24px; color:var(--red); min-width:28px; line-height:1; padding-top:2px; }
+.ov-vendibilidad .freno-title { font-size:14px; font-weight:600; color:var(--ink); margin-bottom:3px; }
+.ov-vendibilidad .freno-desc { font-size:13px; color:var(--ink2); line-height:1.55; }
+.ov-vendibilidad .send-banner { font-size:12px; padding:10px 14px; border-radius:7px; margin-bottom:1rem; display:none; line-height:1.5; }
+.ov-vendibilidad .send-banner.ok { background:#E7F2EA; color:#1B5C2A; border:1px solid #B6D4BC; display:block; }
+.ov-vendibilidad .send-banner.err { background:#F5ECEB; color:var(--red-dark); border:1px solid #DBBAB7; display:block; }
+.ov-vendibilidad .cta-block { background:var(--navy); border-radius:var(--radius); padding:2rem 1.75rem; text-align:center; margin-top:1.5rem; }
+.ov-vendibilidad .cta-block h3 { font-family:'DM Serif Display',serif; font-size:22px; color:#fff; margin-bottom:.5rem; line-height:1.3; }
+.ov-vendibilidad .cta-block p { font-size:13px; color:rgba(255,255,255,.65); max-width:440px; margin:0 auto .9rem; line-height:1.7; }
+.ov-vendibilidad .cta-primary { display:inline-block; background:var(--red); color:#fff; font-family:'Inter',sans-serif; font-size:13px; font-weight:600; padding:11px 28px; border-radius:8px; border:none; cursor:pointer; text-decoration:none; transition:background .15s; }
+.ov-vendibilidad .cta-primary:hover { background:var(--red-mid); }
+.ov-vendibilidad .restart-link { display:block; margin-top:1.25rem; font-size:12px; color:var(--ink3); text-align:center; cursor:pointer; text-decoration:underline; background:none; border:none; font-family:'Inter',sans-serif; }
+.ov-vendibilidad .site-footer { text-align:center; padding:1.5rem 1rem 2.5rem; font-size:11px; color:var(--ink3); border-top:1px solid var(--line); margin-top:3rem; }
+@media(max-width:520px){.ov-vendibilidad .input-row, .ov-vendibilidad .capture-body { grid-template-columns:1fr; }.ov-vendibilidad .field-group.full { grid-column:unset; }.ov-vendibilidad .gauge-card { flex-direction:column; align-items:flex-start; gap:1rem; }.ov-vendibilidad .gauge-score { font-size:52px; min-width:unset; }.ov-vendibilidad .site-header { padding:0 1rem; }}
+</style>
+<div class="ov-vendibilidad">
+<header class="site-header">
+  <div class="logo">RED<span>NORTE</span></div>
+  <div class="header-tag">Evaluación privada</div>
+</header>
+<div class="progress-track"><div class="progress-fill" id="prog"></div></div>
+
+<div class="container">
+
+  <!-- QUIZ -->
+  <div id="quiz">
+    <div class="hero">
+      <div class="hero-eyebrow">Diagnóstico de vendibilidad</div>
+      <h1>¿Por qué no se ha vendido tu propiedad?</h1>
+      <p>Responde los cinco pilares para obtener tu índice de vendibilidad y el plan de corrección con mayor impacto.</p>
+      <div class="pilares-pills">
+        <span class="pill active-pill" id="pill-0">Precio</span>
+        <span class="pill" id="pill-1">Presentación</span>
+        <span class="pill" id="pill-2">Exposición</span>
+        <span class="pill" id="pill-3">Conversión</span>
+        <span class="pill" id="pill-4">Preparación</span>
+      </div>
+    </div>
+    <div class="step-meta">
+      <span class="step-name" id="step-name">Pilar 1 · Precio y competencia</span>
+      <span class="step-count" id="step-count">Preguntas 1–5 de 25</span>
+    </div>
+
+    <!-- P1 -->
+    <div class="pilar p1 active" data-pilar="0">
+      <div class="pilar-title-bar"><h2>Precio y competencia</h2><p>Peso en el índice: 30% · Las propiedades que no se venden casi siempre tienen un problema de precio percibido.</p></div>
+      <div class="questions-card">
+        <div class="q"><div class="q-num">Pregunta 01</div><div class="q-text">¿Cuál es el precio de publicación actual?</div><div class="q-hint">Si hay variación entre portales, anota el más alto y el más bajo.</div><div class="input-row"><input class="q-input" type="number" placeholder="Precio más alto (MXN)" id="p1_ph" oninput="VD.checkAll()"><input class="q-input" type="number" placeholder="Precio más bajo (MXN)" id="p1_pl" oninput="VD.checkAll()"></div></div>
+        <div class="q"><div class="q-num">Pregunta 02</div><div class="q-text">¿Cuántos comparables activos existen en la misma zona con características similares?</div><div class="q-hint">Misma colonia, ±20% de m² construidos, mismo número de recámaras.</div><div class="opts" id="p1_comp"><span class="opt" onclick="VD.sel(this,'p1_comp')">Ninguno</span><span class="opt" onclick="VD.sel(this,'p1_comp')">1 – 2</span><span class="opt" onclick="VD.sel(this,'p1_comp')">3 – 5</span><span class="opt" onclick="VD.sel(this,'p1_comp')">6 – 10</span><span class="opt" onclick="VD.sel(this,'p1_comp')">Más de 10</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 03</div><div class="q-text">¿El precio está por encima, dentro o por debajo del rango comparable?</div><div class="opts" id="p1_rango"><span class="opt" onclick="VD.sel(this,'p1_rango')">Más de 10% por encima</span><span class="opt" onclick="VD.sel(this,'p1_rango')">5–10% por encima</span><span class="opt" onclick="VD.sel(this,'p1_rango')">Dentro del rango</span><span class="opt" onclick="VD.sel(this,'p1_rango')">Por debajo del rango</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 04</div><div class="q-text">¿Se han realizado ajustes de precio desde el lanzamiento?</div><div class="opts" id="p1_ajuste"><span class="opt" onclick="VD.sel(this,'p1_ajuste')">No, precio sin cambios</span><span class="opt" onclick="VD.sel(this,'p1_ajuste')">Sí, una reducción</span><span class="opt" onclick="VD.sel(this,'p1_ajuste')">Sí, dos o más reducciones</span><span class="opt" onclick="VD.sel(this,'p1_ajuste')">El precio ha subido</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 05</div><div class="q-text">¿El propietario tiene flexibilidad real para negociar?</div><div class="q-hint">Esta respuesta define el rango de maniobra del asesor en la negociación.</div><div class="opts" id="p1_flex"><span class="opt" onclick="VD.sel(this,'p1_flex')">Ninguna, precio fijo</span><span class="opt" onclick="VD.sel(this,'p1_flex')">Hasta 3%</span><span class="opt" onclick="VD.sel(this,'p1_flex')">3 – 7%</span><span class="opt" onclick="VD.sel(this,'p1_flex')">Más de 7%</span><span class="opt" onclick="VD.sel(this,'p1_flex')">No lo ha definido</span></div></div>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="pilar p2" data-pilar="1">
+      <div class="pilar-title-bar"><h2>Presentación y contenido</h2><p>Peso en el índice: 20% · La publicación debe construir una razón emocional para visitar, no solo informar.</p></div>
+      <div class="questions-card">
+        <div class="q"><div class="q-num">Pregunta 06</div><div class="q-text">¿Cuántas fotografías tiene la publicación principal?</div><div class="opts" id="p2_fotos"><span class="opt" onclick="VD.sel(this,'p2_fotos')">Menos de 10</span><span class="opt" onclick="VD.sel(this,'p2_fotos')">10 – 19</span><span class="opt" onclick="VD.sel(this,'p2_fotos')">20 – 29</span><span class="opt" onclick="VD.sel(this,'p2_fotos')">30 o más</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 07</div><div class="q-text">¿Las fotografías son de fotógrafo profesional o de celular?</div><div class="opts" id="p2_calfoto"><span class="opt" onclick="VD.sel(this,'p2_calfoto')">Profesional con edición</span><span class="opt" onclick="VD.sel(this,'p2_calfoto')">Profesional sin editar</span><span class="opt" onclick="VD.sel(this,'p2_calfoto')">Celular, buena iluminación</span><span class="opt" onclick="VD.sel(this,'p2_calfoto')">Celular, baja calidad</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 08</div><div class="q-text">¿Qué elementos de contenido están presentes? <em style="font-size:11px;color:var(--ink3)">(selecciona todos los que apliquen)</em></div><div class="opts" id="p2_elem"><span class="opt multi" onclick="VD.multi(this,'p2_elem')">Video recorrido</span><span class="opt multi" onclick="VD.multi(this,'p2_elem')">Recorrido 360°</span><span class="opt multi" onclick="VD.multi(this,'p2_elem')">Plano de distribución</span><span class="opt multi" onclick="VD.multi(this,'p2_elem')">Descripción narrativa</span><span class="opt multi" onclick="VD.multi(this,'p2_elem')">Foto aérea / drone</span><span class="opt multi" onclick="VD.multi(this,'p2_elem')">Staging real o virtual</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 09</div><div class="q-text">¿Los espacios estaban preparados al momento de fotografiar?</div><div class="q-hint">Despejados, limpios, bien iluminados, sin objetos personales visibles.</div><div class="opts" id="p2_prep"><span class="opt" onclick="VD.sel(this,'p2_prep')">Sí, preparación completa</span><span class="opt" onclick="VD.sel(this,'p2_prep')">Parcialmente</span><span class="opt" onclick="VD.sel(this,'p2_prep')">No, se fotografió como estaba</span><span class="opt" onclick="VD.sel(this,'p2_prep')">La propiedad está vacía</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 10</div><div class="q-text">¿La descripción menciona para quién es la propiedad o qué estilo de vida representa?</div><div class="opts" id="p2_narr"><span class="opt" onclick="VD.sel(this,'p2_narr')">Sí, describe perfil y experiencia</span><span class="opt" onclick="VD.sel(this,'p2_narr')">Solo enumera características</span><span class="opt" onclick="VD.sel(this,'p2_narr')">Descripción mínima o vacía</span></div></div>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="pilar p3" data-pilar="2">
+      <div class="pilar-title-bar"><h2>Exposición y posicionamiento</h2><p>Peso en el índice: 15% · No basta con estar publicado: cada semana sin cambios genera menos atención nueva.</p></div>
+      <div class="questions-card">
+        <div class="q"><div class="q-num">Pregunta 11</div><div class="q-text">¿En cuántos portales o canales está publicada actualmente?</div><div class="opts" id="p3_portales"><span class="opt" onclick="VD.sel(this,'p3_portales')">Solo 1 portal</span><span class="opt" onclick="VD.sel(this,'p3_portales')">2 – 3 canales</span><span class="opt" onclick="VD.sel(this,'p3_portales')">4 – 6 canales</span><span class="opt" onclick="VD.sel(this,'p3_portales')">7 o más canales</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 12</div><div class="q-text">¿Hay inconsistencias de precio o título entre publicaciones?</div><div class="opts" id="p3_inc"><span class="opt" onclick="VD.sel(this,'p3_inc')">No, todo unificado</span><span class="opt" onclick="VD.sel(this,'p3_inc')">Títulos distintos, precio igual</span><span class="opt" onclick="VD.sel(this,'p3_inc')">Precios distintos entre portales</span><span class="opt" onclick="VD.sel(this,'p3_inc')">No sé cuántas versiones hay</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 13</div><div class="q-text">¿Se han realizado campañas de publicidad pagada?</div><div class="opts" id="p3_paid"><span class="opt" onclick="VD.sel(this,'p3_paid')">Sí, activas con retargeting</span><span class="opt" onclick="VD.sel(this,'p3_paid')">Sí, pero ya terminaron</span><span class="opt" onclick="VD.sel(this,'p3_paid')">No, solo publicación orgánica</span><span class="opt" onclick="VD.sel(this,'p3_paid')">No lo sé</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 14</div><div class="q-text">¿Cuántas visualizaciones acumuladas reporta el portal principal?</div><div class="q-hint">Estos datos permiten calcular la tasa de caída semanal.</div><div class="input-row"><input class="q-input" type="number" placeholder="Visualizaciones totales" id="p3_views" oninput="VD.checkAll()"><input class="q-input" type="number" placeholder="Días publicada" id="p3_dias" oninput="VD.checkAll()"></div></div>
+        <div class="q"><div class="q-num">Pregunta 15</div><div class="q-text">¿La propiedad tiene landing page o microsite independiente?</div><div class="opts" id="p3_land"><span class="opt" onclick="VD.sel(this,'p3_land')">Sí, con métricas propias</span><span class="opt" onclick="VD.sel(this,'p3_land')">Sí, pero sin métricas</span><span class="opt" onclick="VD.sel(this,'p3_land')">No, solo portales</span></div></div>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="pilar p4" data-pilar="3">
+      <div class="pilar-title-bar"><h2>Conversión y seguimiento</h2><p>Peso en el índice: 20% · El mayor desperdicio no está en las vistas: está entre la visita y la oferta.</p></div>
+      <div class="questions-card">
+        <div class="q"><div class="q-num">Pregunta 16</div><div class="q-text">¿Cuántas consultas y visitas presenciales se han registrado desde el lanzamiento?</div><div class="input-row"><input class="q-input" type="number" placeholder="Total de consultas" id="p4_cons" oninput="VD.checkAll()"><input class="q-input" type="number" placeholder="Total de visitas presenciales" id="p4_vis" oninput="VD.checkAll()"></div></div>
+        <div class="q"><div class="q-num">Pregunta 17</div><div class="q-text">¿Cuántas ofertas formales se han recibido?</div><div class="opts" id="p4_ofertas"><span class="opt" onclick="VD.sel(this,'p4_ofertas')">Ninguna</span><span class="opt" onclick="VD.sel(this,'p4_ofertas')">1 oferta</span><span class="opt" onclick="VD.sel(this,'p4_ofertas')">2 – 3 ofertas</span><span class="opt" onclick="VD.sel(this,'p4_ofertas')">4 o más ofertas</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 18</div><div class="q-text">¿En cuánto tiempo se responde a un interesado nuevo?</div><div class="opts" id="p4_resp"><span class="opt" onclick="VD.sel(this,'p4_resp')">Menos de 10 minutos</span><span class="opt" onclick="VD.sel(this,'p4_resp')">10 – 60 minutos</span><span class="opt" onclick="VD.sel(this,'p4_resp')">1 – 4 horas</span><span class="opt" onclick="VD.sel(this,'p4_resp')">Más de 4 horas o irregular</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 19</div><div class="q-text">¿Se documenta retroalimentación después de cada visita presencial?</div><div class="q-hint">Objeciones, precio percibido, distribución, acabados, intención de regreso.</div><div class="opts" id="p4_fb"><span class="opt" onclick="VD.sel(this,'p4_fb')">Sí, en todos los casos</span><span class="opt" onclick="VD.sel(this,'p4_fb')">En algunos casos</span><span class="opt" onclick="VD.sel(this,'p4_fb')">Casi nunca</span><span class="opt" onclick="VD.sel(this,'p4_fb')">No existe proceso definido</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 20</div><div class="q-text">¿Con qué frecuencia recibe el propietario un reporte de actividad?</div><div class="opts" id="p4_rep"><span class="opt" onclick="VD.sel(this,'p4_rep')">Semanal con métricas</span><span class="opt" onclick="VD.sel(this,'p4_rep')">Quincenal o mensual</span><span class="opt" onclick="VD.sel(this,'p4_rep')">Solo cuando hay novedad</span><span class="opt" onclick="VD.sel(this,'p4_rep')">No hay reportes formales</span></div></div>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="pilar p5" data-pilar="4">
+      <div class="pilar-title-bar"><h2>Preparación para vender</h2><p>Peso en el índice: 15% · Un comprador que detecta un problema documental o físico abandona la negociación.</p></div>
+      <div class="questions-card">
+        <div class="q"><div class="q-num">Pregunta 21</div><div class="q-text">¿La documentación del inmueble está completa y actualizada?</div><div class="q-hint">Escrituras, predial al corriente, libertad de gravamen, RPPC.</div><div class="opts" id="p5_docs"><span class="opt" onclick="VD.sel(this,'p5_docs')">Completa y actualizada</span><span class="opt" onclick="VD.sel(this,'p5_docs')">Completa pero no actualizada</span><span class="opt" onclick="VD.sel(this,'p5_docs')">Incompleta, gestionable</span><span class="opt" onclick="VD.sel(this,'p5_docs')">Incompleta, problema real</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 22</div><div class="q-text">¿La propiedad está ocupada o desocupada?</div><div class="opts" id="p5_ocup"><span class="opt" onclick="VD.sel(this,'p5_ocup')">Desocupada, disponible de inmediato</span><span class="opt" onclick="VD.sel(this,'p5_ocup')">Ocupada, propietario la habita</span><span class="opt" onclick="VD.sel(this,'p5_ocup')">Ocupada por inquilino</span><span class="opt" onclick="VD.sel(this,'p5_ocup')">Desocupada, entrega condicionada</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 23</div><div class="q-text">¿La propiedad requiere reparaciones visibles o detalles pendientes?</div><div class="opts" id="p5_rep"><span class="opt" onclick="VD.sel(this,'p5_rep')">No, está en excelente estado</span><span class="opt" onclick="VD.sel(this,'p5_rep')">Detalles menores (pintura, limpieza)</span><span class="opt" onclick="VD.sel(this,'p5_rep')">Reparaciones medias (3–5 días)</span><span class="opt" onclick="VD.sel(this,'p5_rep')">Remodelación significativa</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 24</div><div class="q-text">¿Cuál es la motivación real del propietario para vender?</div><div class="q-hint">Define urgencia real y margen de negociación. Es la pregunta más importante del pilar.</div><div class="opts" id="p5_motiv"><span class="opt" onclick="VD.sel(this,'p5_motiv')">Urgencia real (deuda, traslado, divorcio)</span><span class="opt" onclick="VD.sel(this,'p5_motiv')">Quiere vender, sin urgencia</span><span class="opt" onclick="VD.sel(this,'p5_motiv')">Explorando el mercado</span><span class="opt" onclick="VD.sel(this,'p5_motiv')">No queda claro, es ambiguo</span></div></div>
+        <div class="q"><div class="q-num">Pregunta 25</div><div class="q-text">¿El propietario está dispuesto a trabajar con un solo asesor en exclusiva?</div><div class="q-hint">La respuesta define el cierre natural de este diagnóstico.</div><div class="opts" id="p5_excl"><span class="opt" onclick="VD.sel(this,'p5_excl')">Sí, sin reservas</span><span class="opt" onclick="VD.sel(this,'p5_excl')">Lo consideraría si ve el valor</span><span class="opt" onclick="VD.sel(this,'p5_excl')">Trabaja con múltiples asesores</span><span class="opt" onclick="VD.sel(this,'p5_excl')">Maneja la propiedad él mismo</span></div></div>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <button class="btn" id="btn-prev" onclick="VD.prev()" disabled>← Anterior</button>
+      <button class="btn primary" id="btn-next" onclick="VD.next()">Siguiente →</button>
+      <span class="answers-chip" id="chip">0 de 25 respondidas</span>
+    </div>
+  </div><!-- /quiz -->
+
+  <!-- CAPTURE -->
+  <div id="capture-screen">
+    <div class="hero" style="padding-top:2rem">
+      <div class="hero-eyebrow">Último paso</div>
+      <h1 style="font-size:clamp(22px,4vw,28px)">¿A quién le enviamos el diagnóstico?</h1>
+      <p>Completa los datos para generar tu índice completo con los tres frenos prioritarios y el plan de relanzamiento.</p>
+    </div>
+    <div class="capture-card">
+      <div class="capture-header">
+        <h2>Datos de la propiedad y contacto</h2>
+        <p>La información se usa únicamente para personalizar el diagnóstico y hacer contacto. No se comparte con terceros.</p>
+      </div>
+      <div class="capture-body">
+        <div class="field-group full">
+          <label class="field-label" for="cap_prop">Nombre o dirección de la propiedad</label>
+          <input class="field-input" type="text" id="cap_prop" placeholder="Ej. Casa Cumbres Elite, Av. Paseo de los Leones 430">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="cap_nombre">Nombre del propietario</label>
+          <input class="field-input" type="text" id="cap_nombre" placeholder="Nombre completo">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="cap_tel">Teléfono / WhatsApp</label>
+          <input class="field-input" type="tel" id="cap_tel" placeholder="+52 81 0000 0000">
+        </div>
+        <div class="field-group full">
+          <label class="field-label" for="cap_email">Correo electrónico</label>
+          <input class="field-input" type="email" id="cap_email" placeholder="correo@ejemplo.com">
+        </div>
+      </div>
+      <div class="capture-footer">
+        <div class="privacy-note">Al continuar aceptas que Rednorte utilice estos datos para enviarte el diagnóstico completo y hacer contacto sobre el plan de relanzamiento. Los datos no se almacenan en este dispositivo.</div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+          <div class="error-msg" id="cap-error">Por favor completa nombre, teléfono y propiedad para continuar.</div>
+          <button class="btn primary" onclick="VD.submitCapture()" id="btn-generar">Ver mi diagnóstico →</button>
+        </div>
+      </div>
+    </div>
+    <button class="btn" style="margin-top:1rem" onclick="VD.backToQuiz()">← Revisar respuestas</button>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result" id="result">
+    <div class="result-hero">
+      <div class="eyebrow">Diagnóstico completo · Rednorte</div>
+      <h2 id="res-headline">Índice de vendibilidad</h2>
+      <p id="res-sub"></p>
+    </div>
+    <div id="send-banner" class="send-banner"></div>
+    <div class="gauge-card">
+      <div><div class="gauge-score" id="gauge-num">—</div><div class="gauge-of">de 100 puntos</div></div>
+      <div class="gauge-right">
+        <div class="gauge-label" id="gauge-lbl"></div>
+        <div class="gauge-text" id="gauge-txt"></div>
+        <div class="gauge-bar-wrap"><div class="gauge-bar-bg"><div class="gauge-bar-fill" id="gauge-bar" style="width:0%"></div></div></div>
+      </div>
+    </div>
+    <div class="section-label">Subíndices por pilar</div>
+    <div class="pilares-result-grid" id="pr-grid"></div>
+    <div class="section-label">Los tres frenos prioritarios</div>
+    <div class="frenos-card" id="frenos-card"></div>
+    <!-- PDF DOWNLOAD -->
+    <div style="border:1px solid var(--line);border-radius:var(--radius);background:var(--white);padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px;">Descarga tu diagnóstico en PDF</div>
+        <div style="font-size:12px;color:var(--ink3);line-height:1.5;">Reporte completo con índice, subíndices, frenos prioritarios y plan de acción. Para compartir con tu familia o asesor.</div>
+      </div>
+      <button class="btn primary" id="btn-pdf" onclick="VD.descargarPDF()" style="white-space:nowrap;flex-shrink:0;">
+        ↓ Descargar PDF
+      </button>
+    </div>
+
+    <div class="cta-block">
+      <h3>La propiedad no necesita más tiempo.<br>Necesita una estrategia distinta.</h3>
+      <p>El diagnóstico identifica qué corregir. La siguiente decisión es quién lo ejecuta, cómo se mide y en qué momento se ajusta.</p>
+      <a class="cta-primary" id="cta-link" href="#">Solicitar revisión privada →</a>
+    </div>
+    <button class="restart-link" onclick="VD.restart()">Reiniciar cuestionario</button>
+  </div>
+
+</div><!-- /container -->
+<footer class="site-footer">Rednorte · Evaluación privada y confidencial · Los datos ingresados no se almacenan en este dispositivo.</footer>
 </div>
+</div>
+
+<script>
+(function(){
+// ─────────────────────────────────────────────
+//  CONFIGURACIÓN  ← edita solo estas dos líneas
+// ─────────────────────────────────────────────
+const WEBHOOK_URL  = 'PEGA_AQUI_TU_WEBHOOK_URL';
+const ASESOR_EMAIL = 'asesor@rednorte.com';
+// ─────────────────────────────────────────────
+
+let cur = 0;
+const TOTAL = 5;
+const pilarMeta = [
+  { name:'Precio y competencia', peso:30, stepName:'Pilar 1 · Precio y competencia',     qs:'1–5'   },
+  { name:'Presentación',         peso:20, stepName:'Pilar 2 · Presentación y contenido',  qs:'6–10'  },
+  { name:'Exposición',           peso:15, stepName:'Pilar 3 · Exposición',                qs:'11–15' },
+  { name:'Conversión',           peso:20, stepName:'Pilar 4 · Conversión y seguimiento',  qs:'16–20' },
+  { name:'Preparación',          peso:15, stepName:'Pilar 5 · Preparación para vender',   qs:'21–25' },
+];
+const frenoTexts = {
+  'Precio y competencia':{ t:'Precio no justificado ante la competencia',       d:'El precio publicado no se sostiene sin presentación o diferenciadores que expliquen la brecha con el mercado comparable. Bajar sin relanzar desperdicia el ajuste.' },
+  'Presentación':        { t:'Contenido visual insuficiente para generar visitas', d:'La publicación informa pero no construye una razón emocional para agendar. El comprador no puede imaginar vivir en la propiedad.' },
+  'Exposición':          { t:'Fragmentación y fatiga de publicación',             d:'La propiedad aparece como una opción más dentro de un inventario amplio. Cada semana sin cambios genera menos atención nueva.' },
+  'Conversión':          { t:'Pérdida de interés entre la visita y la oferta',    d:'El mayor desperdicio no está en las vistas: está en no capturar retroalimentación ni dar seguimiento estructurado a cada interesado.' },
+  'Preparación':         { t:'Condición o documentación que frena la decisión',   d:'Un comprador que detecta un problema documental o un detalle físico sin resolver pospone o abandona la negociación.' },
+};
+
+function sel(el,g){ document.querySelectorAll('#'+g+' .opt:not(.multi)').forEach(o=>o.classList.remove('sel')); el.classList.add('sel'); checkAll(); }
+function multi(el,g){ el.classList.toggle('sel'); checkAll(); }
+
+function countFilled(){
+  const ids=['p1_comp','p1_rango','p1_ajuste','p1_flex','p2_fotos','p2_calfoto','p2_prep','p2_narr','p3_portales','p3_inc','p3_paid','p3_land','p4_ofertas','p4_resp','p4_fb','p4_rep','p5_docs','p5_ocup','p5_rep','p5_motiv','p5_excl'];
+  let c=0;
+  ids.forEach(id=>{ if(document.querySelector('#'+id+' .opt.sel')) c++; });
+  if(document.querySelector('#p2_elem .opt.sel')) c++;
+  if(document.getElementById('p1_ph').value) c++;
+  if(document.getElementById('p3_views').value) c++;
+  if(document.getElementById('p4_cons').value) c++;
+  return Math.min(c,25);
+}
+function checkAll(){ const f=countFilled(); document.getElementById('chip').textContent=f+' de 25 respondidas'; document.getElementById('prog').style.width=Math.round(f/25*80)+'%'; }
+
+function showPilar(n){
+  document.querySelectorAll('.pilar').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.getElementById('step-name').textContent=pilarMeta[n].stepName;
+  document.getElementById('step-count').textContent='Preguntas '+pilarMeta[n].qs+' de 25';
+  document.getElementById('btn-prev').disabled=n===0;
+  document.getElementById('btn-next').textContent=n===TOTAL-1?'Continuar →':'Siguiente →';
+  for(let i=0;i<TOTAL;i++){ const p=document.getElementById('pill-'+i); p.className='pill'+(i<n?' done':i===n?' active-pill':''); }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function prev(){ if(cur>0){cur--;showPilar(cur);} }
+function next(){ if(cur<TOTAL-1){cur++;showPilar(cur);}else{showCapture();} }
+
+function showCapture(){ document.getElementById('quiz').style.display='none'; document.getElementById('capture-screen').style.display='block'; document.getElementById('prog').style.width='90%'; window.scrollTo({top:0,behavior:'smooth'}); }
+function backToQuiz(){ document.getElementById('capture-screen').style.display='none'; document.getElementById('quiz').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); }
+
+function submitCapture(){
+  const nombre=document.getElementById('cap_nombre').value.trim();
+  const tel=document.getElementById('cap_tel').value.trim();
+  const email=document.getElementById('cap_email').value.trim();
+  const prop=document.getElementById('cap_prop').value.trim();
+  const err=document.getElementById('cap-error');
+  if(!nombre||!tel||!prop){ err.style.display='block'; return; }
+  err.style.display='none';
+  const contact={nombre,telefono:tel,email,propiedad:prop};
+  const scores=[calcP1(),calcP2(),calcP3(),calcP4(),calcP5()];
+  const total=Math.round(scores.reduce((a,s,i)=>a+s*pilarMeta[i].peso/100,0));
+  sendToWebhook(contact,scores,total);
+  renderResult(total,scores,contact);
+}
+
+function sendToWebhook(contact,scores,total){
+  if(!WEBHOOK_URL||WEBHOOK_URL==='PEGA_AQUI_TU_WEBHOOK_URL') return;
+  const sorted=[...scores.map((s,i)=>({name:pilarMeta[i].name,score:s,peso:pilarMeta[i].peso}))].sort((a,b)=>(a.score/100*a.peso)-(b.score/100*b.peso));
+  const payload={
+    timestamp:new Date().toISOString(),
+    nombre:contact.nombre, telefono:contact.telefono, email:contact.email, propiedad:contact.propiedad,
+    indice_global:total, clasificacion:scoreTag(total),
+    score_precio:scores[0], score_presentacion:scores[1], score_exposicion:scores[2], score_conversion:scores[3], score_preparacion:scores[4],
+    freno_1:sorted[0].name+' ('+sorted[0].score+')',
+    freno_2:sorted[1].name+' ('+sorted[1].score+')',
+    freno_3:sorted[2].name+' ('+sorted[2].score+')',
+    precio_publicado:document.getElementById('p1_ph').value||'',
+    dias_publicada:document.getElementById('p3_dias').value||'',
+    visualizaciones:document.getElementById('p3_views').value||'',
+    consultas:document.getElementById('p4_cons').value||'',
+    visitas:document.getElementById('p4_vis').value||'',
+    rango_precio:getOpt('p1_rango')||'',
+    calidad_foto:getOpt('p2_calfoto')||'',
+    ofertas:getOpt('p4_ofertas')||'',
+    feedback_visitas:getOpt('p4_fb')||'',
+    exclusiva:getOpt('p5_excl')||'',
+  };
+  fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+    .then(r=>{
+      const b=document.getElementById('send-banner');
+      if(r.ok){ b.className='send-banner ok'; b.textContent='✓ Diagnóstico registrado. Un asesor Rednorte se pondrá en contacto contigo.'; }
+      else{ b.className='send-banner err'; b.textContent='No se pudo registrar el diagnóstico en este momento. Guarda esta pantalla como referencia.'; }
+    })
+    .catch(()=>{ const b=document.getElementById('send-banner'); b.className='send-banner err'; b.textContent='Sin conexión al servidor. Guarda esta pantalla o escríbenos directamente.'; });
+}
+
+function getOpt(id){ const el=document.querySelector('#'+id+' .opt.sel'); return el?el.textContent.trim():null; }
+function getMultiCount(id){ return document.querySelectorAll('#'+id+' .opt.sel').length; }
+function v(id){ return parseFloat(document.getElementById(id).value)||0; }
+function clamp(n){ return Math.max(10,Math.min(100,Math.round(n))); }
+
+function calcP1(){ let s=50; const r=getOpt('p1_rango'); if(r==='Dentro del rango')s+=25;else if(r==='Por debajo del rango')s+=30;else if(r==='5–10% por encima')s+=8;else if(r==='Más de 10% por encima')s-=18; const c=getOpt('p1_comp'); if(c==='Ninguno')s+=12;else if(c==='1 – 2')s+=8;else if(c==='6 – 10')s-=5;else if(c==='Más de 10')s-=10; const a=getOpt('p1_ajuste'); if(a==='Sí, dos o más reducciones')s-=10;else if(a==='El precio ha subido')s-=15;else if(a==='Sí, una reducción')s+=5; const f=getOpt('p1_flex'); if(f==='3 – 7%')s+=5;else if(f==='Más de 7%')s+=8;else if(f==='Ninguna, precio fijo')s-=5; return clamp(s); }
+function calcP2(){ let s=35; const fo=getOpt('p2_fotos'); if(fo==='30 o más')s+=25;else if(fo==='20 – 29')s+=18;else if(fo==='10 – 19')s+=8; const ca=getOpt('p2_calfoto'); if(ca==='Profesional con edición')s+=20;else if(ca==='Profesional sin editar')s+=12;else if(ca==='Celular, buena iluminación')s+=4;else if(ca==='Celular, baja calidad')s-=5; s+=Math.min(getMultiCount('p2_elem')*5,20); const pr=getOpt('p2_prep'); if(pr==='Sí, preparación completa')s+=8;else if(pr==='No, se fotografió como estaba')s-=5; const na=getOpt('p2_narr'); if(na==='Sí, describe perfil y experiencia')s+=8;else if(na==='Descripción mínima o vacía')s-=5; return clamp(s); }
+function calcP3(){ let s=45; const po=getOpt('p3_portales'); if(po==='4 – 6 canales')s+=20;else if(po==='7 o más canales')s+=14;else if(po==='2 – 3 canales')s+=8;else if(po==='Solo 1 portal')s-=10; const inc=getOpt('p3_inc'); if(inc==='No, todo unificado')s+=15;else if(inc==='Precios distintos entre portales')s-=20;else if(inc==='No sé cuántas versiones hay')s-=15; const pa=getOpt('p3_paid'); if(pa==='Sí, activas con retargeting')s+=15;else if(pa==='Sí, pero ya terminaron')s+=5; const la=getOpt('p3_land'); if(la==='Sí, con métricas propias')s+=15;else if(la==='Sí, pero sin métricas')s+=5; const dias=v('p3_dias'),views=v('p3_views'); if(dias>0&&views>0){const vpd=views/dias;if(vpd<5)s-=10;else if(vpd>20)s+=5;} return clamp(s); }
+function calcP4(){ let s=25; const of=getOpt('p4_ofertas'); if(of==='4 o más ofertas')s+=30;else if(of==='2 – 3 ofertas')s+=20;else if(of==='1 oferta')s+=10; const re=getOpt('p4_resp'); if(re==='Menos de 10 minutos')s+=20;else if(re==='10 – 60 minutos')s+=12;else if(re==='1 – 4 horas')s+=5; const fb=getOpt('p4_fb'); if(fb==='Sí, en todos los casos')s+=20;else if(fb==='En algunos casos')s+=10;else if(fb==='No existe proceso definido')s-=5; const rp=getOpt('p4_rep'); if(rp==='Semanal con métricas')s+=15;else if(rp==='Quincenal o mensual')s+=8; const cons=v('p4_cons'),vis=v('p4_vis'); if(cons>0&&vis>0){const rat=vis/cons;if(rat>0.35)s+=5;else if(rat<0.15)s-=5;} return clamp(s); }
+function calcP5(){ let s=50; const d=getOpt('p5_docs'); if(d==='Completa y actualizada')s+=25;else if(d==='Completa pero no actualizada')s+=10;else if(d==='Incompleta, problema real')s-=20; const oc=getOpt('p5_ocup'); if(oc==='Desocupada, disponible de inmediato')s+=15;else if(oc==='Ocupada por inquilino')s-=10; const rp=getOpt('p5_rep'); if(rp==='No, está en excelente estado')s+=15;else if(rp==='Detalles menores (pintura, limpieza)')s+=5;else if(rp==='Remodelación significativa')s-=20; const mo=getOpt('p5_motiv'); if(mo==='Explorando el mercado')s-=5;else if(mo==='No queda claro, es ambiguo')s-=10; const ex=getOpt('p5_excl'); if(ex==='Sí, sin reservas')s+=10;else if(ex==='Lo consideraría si ve el valor')s+=5;else if(ex==='Maneja la propiedad él mismo')s-=10; return clamp(s); }
+
+function scoreColor(s){ return s>=70?'#2D6A3F':s>=50?'#A0570A':'#B03A2E'; }
+function scoreTag(s){ return s>=75?'Vendible':s>=60?'Mejorable':s>=45?'En riesgo':'Freno crítico'; }
+function scoreDesc(s){
+  if(s>=75) return 'La propiedad está bien posicionada. Con ajustes menores en conversión, la venta es probable en el corto plazo.';
+  if(s>=60) return 'Existen oportunidades claras de mejora. Un relanzamiento enfocado puede mover el indicador de forma significativa.';
+  if(s>=45) return 'La propiedad acumula días sin avanzar. Se requiere una estrategia de relanzamiento estructurada antes de seguir publicando.';
+  return 'Sin intervención, la propiedad seguirá acumulando días en mercado. El comprador potencial ya la percibe como un inventario con problema no declarado.';
+}
+
+function renderResult(total,scores,contact){
+  window._pdfTotal=total; window._pdfScores=scores; window._pdfContact=contact;
+  document.getElementById('capture-screen').style.display='none';
+  document.getElementById('prog').style.width='100%';
+  const R=document.getElementById('result');
+  R.style.display='block';
+  setTimeout(()=>R.classList.add('active'),10);
+  const col=scoreColor(total);
+  document.getElementById('res-headline').textContent='Índice de vendibilidad: '+total+' / 100';
+  document.getElementById('res-sub').textContent=(contact.nombre?contact.nombre+', tu diagnóstico':'Tu diagnóstico')+' está listo. Aquí tienes el resultado completo de los 5 pilares.';
+  document.getElementById('gauge-num').textContent=total;
+  document.getElementById('gauge-num').style.color=col;
+  document.getElementById('gauge-lbl').textContent=scoreTag(total);
+  document.getElementById('gauge-lbl').style.color=col;
+  document.getElementById('gauge-txt').textContent=scoreDesc(total);
+  const bar=document.getElementById('gauge-bar');
+  bar.style.background=col;
+  setTimeout(()=>{ bar.style.width=total+'%'; },100);
+  const grid=document.getElementById('pr-grid');
+  grid.innerHTML='';
+  scores.forEach((s,i)=>{ const c=scoreColor(s),m=pilarMeta[i]; grid.innerHTML+=`<div class="pr-card"><div class="pr-name">${m.name} · ${m.peso}%</div><div class="pr-num" style="color:${c}">${s}</div><div class="pr-tag" style="color:${c}">${scoreTag(s)}</div><div class="pr-bar-bg"><div class="pr-bar-fill" style="width:0%;background:${c}" data-w="${s}"></div></div></div>`; });
+  setTimeout(()=>{ document.querySelectorAll('.pr-bar-fill').forEach(b=>{ b.style.width=b.dataset.w+'%'; }); },200);
+  const sorted=[...scores.map((s,i)=>({name:pilarMeta[i].name,score:s,peso:pilarMeta[i].peso}))].sort((a,b)=>(a.score/100*a.peso)-(b.score/100*b.peso));
+  const fc=document.getElementById('frenos-card');
+  fc.innerHTML='';
+  sorted.slice(0,3).forEach((f,i)=>{ const ft=frenoTexts[f.name]; fc.innerHTML+=`<div class="freno"><div class="freno-n">0${i+1}</div><div><div class="freno-title">${ft.t}</div><div class="freno-desc">${ft.d}</div></div></div>`; });
+  const subj=encodeURIComponent('Diagnóstico Rednorte – '+contact.propiedad+' – '+scoreTag(total)+' ('+total+'/100)');
+  const body=encodeURIComponent('Hola, completé el diagnóstico de vendibilidad de "'+contact.propiedad+'" y obtuve '+total+'/100 ('+scoreTag(total)+'). Me gustaría agendar una revisión privada.');
+  document.getElementById('cta-link').href='mailto:'+ASESOR_EMAIL+'?subject='+subj+'&body='+body;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ─── PDF GENERATION ────────────────────────────────────────────────
+let _jspdfLoaded = false;
+function loadJsPDF(cb){
+  if(_jspdfLoaded){ cb(); return; }
+  const s=document.createElement('script');
+  s.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+  s.onload=()=>{ _jspdfLoaded=true; cb(); };
+  document.head.appendChild(s);
+}
+
+function descargarPDF(){
+  const btn=document.getElementById('btn-pdf');
+  btn.textContent='Generando...'; btn.disabled=true;
+  loadJsPDF(()=>{ generarPDF(); btn.textContent='↓ Descargar PDF'; btn.disabled=false; });
+}
+
+function generarPDF(){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation:'portrait', unit:'mm', format:'a4' });
+  const W=210, H=297;
+  const ML=18, MR=18, TW=W-ML-MR;
+
+  // Color helpers
+  const navy  = [26,43,69];
+  const red   = [176,58,46];
+  const white = [255,255,255];
+  const gray1 = [248,246,243];
+  const gray2 = [224,221,216];
+  const ink   = [28,28,28];
+  const ink2  = [74,74,74];
+  const ink3  = [122,122,122];
+  const green = [45,106,63];
+  const amber = [160,87,10];
+
+  function scoreCol(s){ return s>=70?green:s>=50?amber:red; }
+  function scoreTag(s){ return s>=75?'Vendible':s>=60?'Mejorable':s>=45?'En riesgo':'Freno crítico'; }
+
+  // Retrieve stored result data
+  const total   = window._pdfTotal   || 0;
+  const scores  = window._pdfScores  || [0,0,0,0,0];
+  const contact = window._pdfContact || {};
+  const fecha   = new Date().toLocaleDateString('es-MX',{year:'numeric',month:'long',day:'numeric'});
+
+  // ── PAGE 1 ──────────────────────────────────────────────────────
+
+  // Header band
+  doc.setFillColor(...navy);
+  doc.rect(0,0,W,22,'F');
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(13);
+  doc.setTextColor(...white);
+  doc.text('REDNORTE',ML,13);
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(7.5);
+  doc.setTextColor(180,190,200);
+  doc.text('DIAGNÓSTICO DE VENDIBILIDAD  ·  EVALUACIÓN PRIVADA',ML,18);
+  doc.setTextColor(180,190,200);
+  doc.text(fecha, W-ML, 13, {align:'right'});
+
+  let y = 32;
+
+  // Property + owner
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(7);
+  doc.setTextColor(...ink3);
+  doc.text('PROPIEDAD EVALUADA', ML, y);
+  y+=5;
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(14);
+  doc.setTextColor(...ink);
+  doc.text(contact.propiedad||'—', ML, y);
+  y+=5;
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(9);
+  doc.setTextColor(...ink2);
+  doc.text((contact.nombre||'')+(contact.email?' · '+contact.email:'')+(contact.telefono?' · '+contact.telefono:''), ML, y);
+  y+=10;
+
+  // Divider
+  doc.setDrawColor(...gray2);
+  doc.setLineWidth(0.3);
+  doc.line(ML,y,W-MR,y);
+  y+=8;
+
+  // Big score box
+  const boxH=32;
+  doc.setFillColor(...gray1);
+  doc.roundedRect(ML,y,TW,boxH,3,3,'F');
+
+  // Circle score
+  const cx=ML+22, cy=y+boxH/2;
+  doc.setFillColor(...scoreCol(total));
+  doc.circle(cx,cy,10,'F');
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(16);
+  doc.setTextColor(...white);
+  doc.text(String(total),cx,cy+2,{align:'center'});
+
+  // Score label block
+  const lx=ML+38;
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(11);
+  doc.setTextColor(...ink);
+  doc.text('Índice de vendibilidad: '+total+' / 100',lx,y+10);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(9);
+  doc.setTextColor(...scoreCol(total));
+  doc.text(scoreTag(total).toUpperCase(),lx,y+17);
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(8);
+  doc.setTextColor(...ink2);
+  const descLines=doc.splitTextToSize(scoreDesc(total),TW-42);
+  doc.text(descLines,lx,y+23);
+
+  y+=boxH+10;
+
+  // Pilares subíndices — header
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(7);
+  doc.setTextColor(...ink3);
+  doc.text('SUBÍNDICES POR PILAR',ML,y);
+  y+=5;
+
+  const pilarNames=['Precio y competencia','Presentación','Exposición','Conversión','Preparación'];
+  const pilarPesos=[30,20,15,20,15];
+  const colW=TW/5;
+
+  scores.forEach((s,i)=>{
+    const x=ML+i*colW;
+    const col=scoreCol(s);
+    // Card bg
+    doc.setFillColor(...gray1);
+    doc.roundedRect(x,y,colW-2,28,2,2,'F');
+    // Color top bar
+    doc.setFillColor(...col);
+    doc.roundedRect(x,y,colW-2,3,1,1,'F');
+    // Pilar name
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(6.5);
+    doc.setTextColor(...ink3);
+    const nameLines=doc.splitTextToSize(pilarNames[i]+' · '+pilarPesos[i]+'%',colW-6);
+    doc.text(nameLines,x+3,y+8);
+    // Score number
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(16);
+    doc.setTextColor(...col);
+    doc.text(String(s),x+3,y+20);
+    // Tag
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(5.5);
+    doc.setTextColor(...col);
+    doc.text(scoreTag(s).toUpperCase(),x+3,y+26);
+    // Bar bg
+    doc.setFillColor(...gray2);
+    doc.rect(x+3,y+27.5,colW-8,1,'F');
+    // Bar fill
+    doc.setFillColor(...col);
+    doc.rect(x+3,y+27.5,(colW-8)*s/100,1,'F');
+  });
+
+  y+=36;
+
+  // Frenos — header
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(7);
+  doc.setTextColor(...ink3);
+  doc.text('LOS TRES FRENOS PRIORITARIOS',ML,y);
+  y+=5;
+
+  const sorted=[...scores.map((s,i)=>({name:pilarNames[i],score:s,peso:pilarPesos[i]}))]
+    .sort((a,b)=>(a.score/100*a.peso)-(b.score/100*b.peso));
+
+  const frenoTitles={
+    'Precio y competencia':'Precio no justificado ante la competencia',
+    'Presentación':'Contenido visual insuficiente para generar visitas',
+    'Exposición':'Fragmentación y fatiga de publicación',
+    'Conversión':'Pérdida de interés entre la visita y la oferta',
+    'Preparación':'Condición o documentación que frena la decisión'
+  };
+  const frenoDescs={
+    'Precio y competencia':'El precio publicado no se sostiene sin presentación o diferenciadores que expliquen la brecha con el mercado comparable. Bajar sin relanzar desperdicia el ajuste.',
+    'Presentación':'La publicación informa pero no construye una razón emocional para agendar. El comprador no puede imaginar vivir en la propiedad.',
+    'Exposición':'La propiedad aparece como una opción más dentro de un inventario amplio. Cada semana sin cambios genera menos atención nueva.',
+    'Conversión':'El mayor desperdicio no está en las vistas: está en no capturar retroalimentación ni dar seguimiento estructurado a cada interesado.',
+    'Preparación':'Un comprador que detecta un problema documental o un detalle físico sin resolver pospone o abandona la negociación.'
+  };
+
+  sorted.slice(0,3).forEach((f,i)=>{
+    // Card
+    doc.setFillColor(...gray1);
+    doc.roundedRect(ML,y,TW,22,2,2,'F');
+    // Red number
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(16);
+    doc.setTextColor(...red);
+    doc.text('0'+(i+1),ML+5,y+14);
+    // Title
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(9);
+    doc.setTextColor(...ink);
+    doc.text(frenoTitles[f.name],ML+18,y+8);
+    // Desc
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(7.5);
+    doc.setTextColor(...ink2);
+    const dLines=doc.splitTextToSize(frenoDescs[f.name],TW-22);
+    doc.text(dLines,ML+18,y+14);
+    y+=26;
+  });
+
+  // ── PAGE 2 ──────────────────────────────────────────────────────
+  doc.addPage();
+
+  // Header band p2
+  doc.setFillColor(...navy);
+  doc.rect(0,0,W,22,'F');
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(13);
+  doc.setTextColor(...white);
+  doc.text('REDNORTE',ML,13);
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(7.5);
+  doc.setTextColor(180,190,200);
+  doc.text('PLAN DE RELANZAMIENTO  ·  RUTA DE EJECUCIÓN',ML,18);
+
+  y=32;
+
+  // Plan title
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(13);
+  doc.setTextColor(...ink);
+  doc.text('Plan recomendado de relanzamiento',ML,y);
+  y+=5;
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(8.5);
+  doc.setTextColor(...ink2);
+  doc.text('Cinco fases secuenciales con decisiones basadas en señales de mercado.',ML,y);
+  y+=10;
+
+  // Phases
+  const fases=[
+    {t:'0 – 72 horas · Diagnóstico y estrategia',d:'Comparables actualizados, objetivo de venta, revisión documental, rango de precio competitivo y lista de preparación física.'},
+    {t:'Días 4 – 7 · Producción de contenido',d:'Home staging, fotografía profesional, video vertical y horizontal, plano de distribución y redacción de descripción por perfil de comprador.'},
+    {t:'Día 8 · Lanzamiento coordinado',d:'Publicación unificada en portales, redes sociales, base de compradores calificados y red de asesores colaboradores.'},
+    {t:'Día 21 · Revisión de señales',d:'Análisis de impresiones, consultas, visitas, objeciones recurrentes y señales de oferta. Decisión de ajuste basada en datos reales.'},
+    {t:'Día 45 · Decisión de estrategia',d:'Mantener posicionamiento, optimizar atributos de presentación o ajustar rango de precio con base en el aprendizaje acumulado.'},
+  ];
+
+  fases.forEach((f,i)=>{
+    doc.setFillColor(...gray1);
+    doc.roundedRect(ML,y,TW,18,2,2,'F');
+    doc.setFillColor(...navy);
+    doc.roundedRect(ML,y,6,18,2,2,'F');
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(8);
+    doc.setTextColor(...ink);
+    doc.text(f.t,ML+10,y+7);
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(7.5);
+    doc.setTextColor(...ink2);
+    const fLines=doc.splitTextToSize(f.d,TW-14);
+    doc.text(fLines,ML+10,y+13);
+    y+=22;
+  });
+
+  y+=4;
+
+  // KPIs target
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(7);
+  doc.setTextColor(...ink3);
+  doc.text('INDICADORES OBJETIVO DEL RELANZAMIENTO',ML,y);
+  y+=5;
+
+  const kpis=[
+    ['Respuesta inicial','< 10 min'],
+    ['Vista a consulta','3.5%+'],
+    ['Consulta a visita','35%+'],
+    ['Visita a oferta','10%+'],
+    ['Feedback registrado','100%'],
+    ['Reporte al propietario','Semanal'],
+  ];
+  const kColW=TW/3;
+  kpis.forEach((k,i)=>{
+    const col=i%3, row=Math.floor(i/3);
+    const kx=ML+col*kColW, ky=y+row*16;
+    doc.setFillColor(...gray1);
+    doc.roundedRect(kx,ky,kColW-3,13,2,2,'F');
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(7);
+    doc.setTextColor(...ink3);
+    doc.text(k[0],kx+5,ky+6);
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(9);
+    doc.setTextColor(...navy);
+    doc.text(k[1],kx+5,ky+11);
+  });
+  y+=38;
+
+  // CTA box
+  doc.setFillColor(...navy);
+  doc.roundedRect(ML,y,TW,28,3,3,'F');
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(11);
+  doc.setTextColor(...white);
+  doc.text('La propiedad no necesita más tiempo.',ML+TW/2,y+10,{align:'center'});
+  doc.text('Necesita una estrategia distinta.',ML+TW/2,y+17,{align:'center'});
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(8);
+  doc.setTextColor(180,190,200);
+  doc.text('Rednorte · Revisión privada de 20 minutos · Sin obligación de contratar',ML+TW/2,y+24,{align:'center'});
+
+  // Footer both pages
+  [1,2].forEach(pg=>{
+    doc.setPage(pg);
+    doc.setFillColor(...gray2);
+    doc.rect(0,H-10,W,10,'F');
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(6.5);
+    doc.setTextColor(...ink3);
+    doc.text('Rednorte · Evaluación privada y confidencial · Los datos de esta evaluación no sustituyen un avalúo comercial.',ML,H-4);
+    doc.text('Página '+pg+' de 2',W-ML,H-4,{align:'right'});
+  });
+
+  // Save
+  const fname='Diagnostico_Rednorte_'+(contact.propiedad||'propiedad').replace(/\s+/g,'_').substring(0,30)+'.pdf';
+  doc.save(fname);
+}
+// ────────────────────────────────────────────────────────────────────
+
+function restart(){
+  document.getElementById('quiz').style.display='block';
+  document.getElementById('result').style.display='none';
+  document.getElementById('result').classList.remove('active');
+  document.getElementById('capture-screen').style.display='none';
+  document.getElementById('send-banner').className='send-banner';
+  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));
+  document.querySelectorAll('.q-input,.field-input').forEach(i=>i.value='');
+  cur=0; showPilar(0); checkAll();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+window.VD = { sel, multi, checkAll, prev, next, backToQuiz, submitCapture, descargarPDF, restart };
+})();
+</script>
 
 <div class="page" id="page-404">
  <div class="page-content">
@@ -3424,7 +4244,7 @@ function renderPropsPage(page) {
 }
 
 // ---- NAV ----
-const pages = ['inicio','propiedades','ficha','servicios','valuacion','nosotros','contacto','equipo','aviso','404','insides','cita','faq','bolsa','vendibilidad'];
+const pages = ['inicio','propiedades','ficha','servicios','herramientas','valuacion','nosotros','contacto','equipo','aviso','404','insides','cita','faq','bolsa','vendibilidad'];
 const navItems = ['inicio','propiedades','servicios','nosotros','contacto','equipo','insides'];
 
 function navTo(page) {
@@ -3437,7 +4257,7 @@ function navTo(page) {
  if (el) el.classList.toggle('active', n===page);
  });
  const navHerramientas = document.getElementById('nav-herramientas');
- if (navHerramientas) navHerramientas.classList.toggle('active', page==='valuacion');
+ if (navHerramientas) navHerramientas.classList.toggle('active', page==='herramientas' || page==='valuacion' || page==='vendibilidad');
  window.scrollTo({top:0,behavior:'smooth'});
  if (page==='propiedades') renderPropsPage(1);
  if (page==='ficha') renderProps('similar-props', 3);
