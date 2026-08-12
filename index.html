@@ -1006,9 +1006,9 @@ body{top:0 !important;}
  <nav>
  <a onclick="navTo('inicio')" id="nav-inicio" class="active">Inicio</a>
  <a onclick="navTo('propiedades')" id="nav-propiedades">Propiedades</a>
- <a onclick="navTo('servicios')" id="nav-servicios">Servicios</a>
+ <!-- Oculto temporalmente hasta tener el contenido listo: <a onclick="navTo('servicios')" id="nav-servicios">Servicios</a> -->
  <a onclick="navTo('herramientas')" id="nav-herramientas">Herramientas</a>
- <a onclick="navTo('insides')" id="nav-insides">Insights</a>
+ <!-- Oculto temporalmente hasta tener el contenido listo: <a onclick="navTo('insides')" id="nav-insides">Insights</a> -->
  <a onclick="navTo('nosotros')" id="nav-nosotros">Nosotros</a>
  <a onclick="navTo('contacto')" id="nav-contacto">Contacto</a>
  </nav>
@@ -1026,9 +1026,9 @@ body{top:0 !important;}
 <div class="mobile-menu" id="mobile-menu">
  <a onclick="navTo('inicio');toggleMenu()">Inicio</a>
  <a onclick="navTo('propiedades');toggleMenu()">Propiedades</a>
- <a onclick="navTo('servicios');toggleMenu()">Servicios</a>
+ <!-- Oculto temporalmente hasta tener el contenido listo: <a onclick="navTo('servicios');toggleMenu()">Servicios</a> -->
  <a onclick="navTo('herramientas');toggleMenu()">Herramientas</a>
- <a onclick="navTo('insides');toggleMenu()">Insights</a>
+ <!-- Oculto temporalmente hasta tener el contenido listo: <a onclick="navTo('insides');toggleMenu()">Insights</a> -->
  <a onclick="navTo('nosotros');toggleMenu()">Nosotros</a>
  <a onclick="navTo('contacto');toggleMenu()">Contacto</a>
  <a class="btn-wa-nav" href="https://wa.me/528117783953" target="_blank"> Hablar por WhatsApp</a>
@@ -2949,13 +2949,14 @@ function clearAll() {
   }
 .ov-vendibilidad { font-family:'Inter',sans-serif; background:var(--surface); color:var(--ink); min-height:100vh; line-height:1.6; }
 .ov-vendibilidad .site-header { background:var(--navy); padding:0 2rem; height:56px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
-.ov-vendibilidad .logo { font-family:'DM Serif Display',serif; font-size:18px; color:#fff; letter-spacing:.5px; }
+.ov-vendibilidad .logo { display:inline-block; align-items:normal; gap:0; cursor:default; font-family:'DM Serif Display',serif; font-size:18px; color:#fff; letter-spacing:.5px; }
 .ov-vendibilidad .logo span { color:#C8705F; }
 .ov-vendibilidad .header-tag { font-size:11px; color:rgba(255,255,255,.5); letter-spacing:1.5px; text-transform:uppercase; }
 .ov-vendibilidad .progress-track { height:3px; background:rgba(0,0,0,.08); position:sticky; top:56px; z-index:99; }
 .ov-vendibilidad .progress-fill { height:3px; background:var(--red); transition:width .5s ease; width:0%; }
 .ov-vendibilidad .container { max-width:720px; margin:0 auto; padding:0 1.25rem 4rem; }
-.ov-vendibilidad .hero { padding:3rem 0 2rem; border-bottom:1px solid var(--line); margin-bottom:2rem; }
+.ov-vendibilidad .hero { display:block; position:static; overflow:visible; background:none; min-height:0; align-items:normal; padding:3rem 0 2rem; border-bottom:1px solid var(--line); margin-bottom:2rem; }
+.ov-vendibilidad .hero::before { content:none; }
 .ov-vendibilidad .hero-eyebrow { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--red); font-weight:500; margin-bottom:.75rem; }
 .ov-vendibilidad .hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(26px,5vw,36px); color:var(--navy); line-height:1.2; margin-bottom:.75rem; }
 .ov-vendibilidad .hero p { font-size:14px; color:var(--ink2); max-width:520px; line-height:1.7; }
@@ -4201,6 +4202,19 @@ function applyPropFilters() {
  renderPropsPage(1);
 }
 
+function filtrarPropiedadesFooter(operacion, tipo, categoria) {
+ const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val; };
+ set('f-operacion', operacion || '');
+ set('f-tipo', tipo || '');
+ set('f-categoria', categoria || '');
+ set('f-zona', '');
+ set('f-precio-min', ''); set('f-precio-max', '');
+ set('f-recamaras', '0'); set('f-banos', '0');
+ set('f-m2-min', ''); set('f-m2-max', '');
+ applyPropFilters();
+ navTo('propiedades');
+}
+
 function clearPropFilters() {
  ['f-operacion','f-tipo','f-categoria','f-zona'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
  ['f-precio-min','f-precio-max','f-m2-min','f-m2-max'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
@@ -4382,6 +4396,28 @@ function enviarContactoWA() {
 
 function continuarContactoWA() {
  window.open('https://wa.me/528117783953?text=' + encodeURIComponent(buildContactoMessage()), '_blank');
+}
+
+// ---- BOLSA DE TRABAJO: enviar candidatura espontanea por WhatsApp ----
+function enviarBolsaWA() {
+ const nombre = getVal('bolsa-nombre');
+ const tel = getVal('bolsa-tel');
+ const email = getVal('bolsa-email');
+ const puesto = getVal('bolsa-puesto');
+ const mensaje = getVal('bolsa-mensaje');
+
+ if (!nombre || !tel || !email) {
+ alert('Por favor completa nombre, teléfono y correo electrónico.');
+ return;
+ }
+
+ const lines = ['Hola, quiero postularme a Rednorte.', ''];
+ if (puesto) lines.push(`Puesto de interés: ${puesto}`);
+ lines.push(`Nombre: ${nombre}`, `Teléfono: ${tel}`, `Correo: ${email}`);
+ if (mensaje) lines.push('', `¿Por qué quiere unirse?: ${mensaje}`);
+
+ window.open('https://wa.me/528117783953?text=' + encodeURIComponent(lines.join('\n')), '_blank');
+ openModal('successModal');
 }
 
 // ---- MOBILE MENU ----
@@ -4600,17 +4636,17 @@ document.querySelectorAll('.modal-overlay').forEach(m => {
  <div style="background:white;border-radius:14px;border:1px solid var(--gris-claro);padding:2rem;margin-top:2rem;">
  <h3 style="font-size:1rem;font-weight:700;color:var(--negro);margin-bottom:1.25rem;">Enviar candidatura espontanea</h3>
  <div class="form-row">
- <div class="form-group"><label>Nombre completo *</label><input type="text" placeholder="Tu nombre"></div>
- <div class="form-group"><label>Telefono *</label><input type="tel" placeholder="+52 (81)"></div>
+ <div class="form-group"><label>Nombre completo *</label><input id="bolsa-nombre" type="text" placeholder="Tu nombre"></div>
+ <div class="form-group"><label>Telefono *</label><input id="bolsa-tel" type="tel" placeholder="+52 (81)"></div>
  </div>
- <div class="form-group"><label>Correo electronico *</label><input type="email" placeholder="correo@ejemplo.com"></div>
+ <div class="form-group"><label>Correo electronico *</label><input id="bolsa-email" type="email" placeholder="correo@ejemplo.com"></div>
  <div class="form-group"><label>Puesto de interes</label>
- <select><option>Asesor inmobiliario</option><option>Coordinador de ventas</option><option>Marketing digital</option><option>Administracion</option><option>Otro</option></select>
+ <select id="bolsa-puesto"><option>Asesor inmobiliario</option><option>Coordinador de ventas</option><option>Marketing digital</option><option>Administracion</option><option>Otro</option></select>
  </div>
  <div class="form-group"><label>Por que quieres unirte a Rednorte?</label>
- <textarea rows="4" placeholder="Cuentanos sobre ti..."></textarea>
+ <textarea id="bolsa-mensaje" rows="4" placeholder="Cuentanos sobre ti..."></textarea>
  </div>
- <button class="btn-primary-full" onclick="openModal('successModal')">Enviar solicitud</button>
+ <button class="btn-primary-full" onclick="enviarBolsaWA()">Enviar solicitud</button>
  </div>
  </div>
  </div>
@@ -4638,11 +4674,11 @@ document.querySelectorAll('.modal-overlay').forEach(m => {
  <div class="footer-col">
  <h4>Propiedades</h4>
  <ul class="footer-links">
- <li><a onclick="navTo('propiedades')">Casas en venta</a></li>
- <li><a onclick="navTo('propiedades')">Departamentos</a></li>
- <li><a onclick="navTo('propiedades')">Casas en renta</a></li>
- <li><a onclick="navTo('propiedades')">Comercial</a></li>
- <li><a onclick="navTo('propiedades')">Industrial</a></li>
+ <li><a onclick="filtrarPropiedadesFooter('Venta','Casa','')">Casas en venta</a></li>
+ <li><a onclick="filtrarPropiedadesFooter('','Depto','')">Departamentos</a></li>
+ <li><a onclick="filtrarPropiedadesFooter('Renta','Casa','')">Casas en renta</a></li>
+ <li><a onclick="filtrarPropiedadesFooter('','','Comercial')">Comercial</a></li>
+ <li><a onclick="filtrarPropiedadesFooter('','','Industrial')">Industrial</a></li>
  </ul>
  </div>
  <div class="footer-col">
@@ -4651,9 +4687,7 @@ document.querySelectorAll('.modal-overlay').forEach(m => {
  <li><a onclick="navTo('servicios')">Venta</a></li>
  <li><a onclick="navTo('servicios')">Renta</a></li>
  <li><a onclick="navTo('valuacion')">Valuación gratuita</a></li>
- <li><a onclick="navTo('servicios')">Inversión</a></li>
  <li><a onclick="navTo('nosotros')">Nosotros</a></li>
- <li><a onclick="navTo('faq')">FAQ</a></li>
  <li><a onclick="navTo('bolsa')">Bolsa de trabajo</a></li>
  </ul>
  </div>
