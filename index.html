@@ -1176,7 +1176,7 @@ body{top:0 !important;}
  <span class="crm-tag"><span class="crm-dot"></span> Datos en tiempo real del CRM</span>
  <a style="font-size:14px;font-weight:600;color:var(--terracota);text-decoration:none;cursor:pointer;" onclick="navTo('propiedades')">Ver todo el inventario →</a>
  </div>
- <div class="props-carousel-wrap">
+ <div class="props-carousel-wrap" onmouseenter="pauseFeaturedAutoplay()" onmouseleave="startFeaturedAutoplay()">
  <button class="carousel-nav-btn prev" onclick="scrollFeaturedCarousel(-1)" aria-label="Anteriores">‹</button>
  <div class="props-carousel" id="featured-props"></div>
  <button class="carousel-nav-btn next" onclick="scrollFeaturedCarousel(1)" aria-label="Siguientes">›</button>
@@ -1338,7 +1338,7 @@ body{top:0 !important;}
  </div>
  </div>
  <p class="footer-desc">Especialistas en venta, renta e inversión inmobiliaria en Monterrey y Nuevo León. Conectamos propiedades con decisiones inteligentes.</p>
- <p class="footer-address"> Av. José Vasconcelos Ote. 215, Local 7<br>Residencial San Agustín 1er Sector<br>San Pedro Garza García, N.L. 66260</p>
+ <p class="footer-address"> Av. José Vasconcelos Ote. 215, Local-7<br>Residencial San Agustín 1er Sector<br>San Pedro Garza García, N.L. 66260</p>
  <div class="footer-social">
  <a class="social-btn" href="#" title="Facebook">f</a>
  <a class="social-btn" href="#" title="Instagram">in</a>
@@ -2863,7 +2863,7 @@ function clearAll() {
  <div class="form-card">
  <h3 style="font-size:14px;font-weight:700;color:var(--gris-medio);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.75rem;">Motivo de contacto</h3>
  <div class="motivos">
- <button class="motivo-btn active">Quiero comprar</button>
+ <button class="motivo-btn active" onclick="setMotivo(this)">Quiero comprar</button>
  <button class="motivo-btn" onclick="setMotivo(this)">Quiero vender</button>
  <button class="motivo-btn" onclick="setMotivo(this)">Quiero rentar</button>
  <button class="motivo-btn" onclick="setMotivo(this)">Ofrecer en renta</button>
@@ -2872,24 +2872,24 @@ function clearAll() {
  <button class="motivo-btn" onclick="setMotivo(this)">Info propiedad</button>
  </div>
  <div class="form-row" style="margin-top:1.25rem;">
- <div class="form-group"><label>Nombre *</label><input type="text" placeholder="Tu nombre completo"></div>
- <div class="form-group"><label>Teléfono *</label><input type="tel" placeholder="+52 (81)"></div>
+ <div class="form-group"><label>Nombre *</label><input id="contacto-nombre" type="text" placeholder="Tu nombre completo"></div>
+ <div class="form-group"><label>Teléfono *</label><input id="contacto-tel" type="tel" placeholder="+52 (81)"></div>
  </div>
- <div class="form-group"><label>Correo electrónico *</label><input type="email" placeholder="correo@ejemplo.com"></div>
- <div class="form-group"><label>Mensaje</label><textarea rows="4" placeholder="Cuéntanos más sobre lo que necesitas..."></textarea></div>
+ <div class="form-group"><label>Correo electrónico *</label><input id="contacto-email" type="email" placeholder="correo@ejemplo.com"></div>
+ <div class="form-group"><label>Mensaje</label><textarea id="contacto-mensaje" rows="4" placeholder="Cuéntanos más sobre lo que necesitas..."></textarea></div>
  <div class="form-check">
  <input type="checkbox" id="priv2">
  <label for="priv2">Acepto el <a onclick="navTo('aviso')" style="color:var(--terracota);cursor:pointer;">Aviso de Privacidad</a>.</label>
  </div>
- <button class="btn-primary-full" onclick="openModal('successModal')">Enviar mensaje</button>
- <a class="btn-wa-full" href="https://wa.me/528117783953" target="_blank"> Continuar por WhatsApp</a>
+ <button class="btn-primary-full" onclick="enviarContactoWA()">Enviar mensaje</button>
+ <button class="btn-wa-full" onclick="continuarContactoWA()"> Continuar por WhatsApp</button>
  </div>
  <div class="contacto-info">
  <div class="info-card">
  <h4>Información de contacto</h4>
  <div class="info-item"><div class="info-icon"></div><div class="info-text"><span class="info-label">Teléfono</span>(811) 778-3953</div></div>
  <div class="info-item"><div class="info-icon"></div><div class="info-text"><span class="info-label">WhatsApp</span><a href="https://wa.me/528117783953" style="color:var(--terracota);">+52 (811) 778-3953</a></div></div>
- <div class="info-item"><div class="info-icon"></div><div class="info-text"><span class="info-label">Dirección</span>Av. José Vasconcelos Ote. 215, Local 7, Residencial San Agustín 1er Sector, San Pedro Garza García, N.L. 66260</div></div>
+ <div class="info-item"><div class="info-icon"></div><div class="info-text"><span class="info-label">Dirección</span>Av. José Vasconcelos Ote. 215, Local-7, Residencial San Agustín 1er Sector, San Pedro Garza García, N.L. 66260</div></div>
  <div class="info-item"><div class="info-icon"></div><div class="info-text"><span class="info-label">Horario</span>Lun–Vie: 9:00 – 18:00 h<br>Sáb: 10:00 – 14:00 h</div></div>
  </div>
  <div class="info-card">
@@ -2930,7 +2930,7 @@ function clearAll() {
  <p class="legal-date">Última actualización: enero 2024</p>
  <div class="legal-section">
  <h2>Responsable del tratamiento de datos</h2>
- <p>Rednorte Inmobiliaria, con domicilio en Av. José Vasconcelos Ote. 215, Local 7, Residencial San Agustín 1er Sector, San Pedro Garza García, Nuevo León, C.P. 66260, es responsable del uso y protección de sus datos personales.</p>
+ <p>Rednorte Inmobiliaria, con domicilio en Av. José Vasconcelos Ote. 215, Local-7, Residencial San Agustín 1er Sector, San Pedro Garza García, Nuevo León, C.P. 66260, es responsable del uso y protección de sus datos personales.</p>
  </div>
  <div class="legal-section">
  <h2>Datos personales recabados</h2>
@@ -3151,15 +3151,38 @@ async function fetchLiveProperties() {
  if (document.getElementById('featured-props')) renderProps('featured-props', 10);
  if (document.getElementById('similar-props')) renderProps('similar-props', 3);
  if (document.getElementById('all-props')) renderPropsPage(1);
+ startFeaturedAutoplay();
 }
 
 // ---- CARRUSEL DE PROPIEDADES DESTACADAS ----
-function scrollFeaturedCarousel(dir) {
+function stepFeaturedCarousel(dir) {
  const el = document.getElementById('featured-props');
  if (!el) return;
  const card = el.querySelector('.prop-card');
  const step = card ? card.getBoundingClientRect().width + 24 : 340;
+ const atEnd = dir > 0 && el.scrollLeft + el.clientWidth >= el.scrollWidth - 5;
+ if (atEnd) {
+ el.scrollTo({ left: 0, behavior: 'smooth' });
+ } else {
  el.scrollBy({ left: dir * step, behavior: 'smooth' });
+ }
+}
+
+function scrollFeaturedCarousel(dir) {
+ stepFeaturedCarousel(dir);
+ startFeaturedAutoplay();
+}
+
+let featuredAutoplayTimer = null;
+function startFeaturedAutoplay() {
+ const el = document.getElementById('featured-props');
+ if (!el || el.querySelectorAll('.prop-card').length < 2) return;
+ if (featuredAutoplayTimer) clearInterval(featuredAutoplayTimer);
+ featuredAutoplayTimer = setInterval(() => stepFeaturedCarousel(1), 4000);
+}
+
+function pauseFeaturedAutoplay() {
+ if (featuredAutoplayTimer) { clearInterval(featuredAutoplayTimer); featuredAutoplayTimer = null; }
 }
 
 // ---- CARRUSEL EN TARJETAS ----
@@ -3566,6 +3589,47 @@ function enviarCitaWA() {
  const advisorNumber = href.replace('tel:+', '').replace(/\D/g, '') || '528117783953';
 
  window.open('https://wa.me/' + advisorNumber + '?text=' + encodeURIComponent(lines.join('\n')), '_blank');
+}
+
+// ---- CONTACTO: enviar formulario general por WhatsApp ----
+function buildContactoMessage() {
+ const nombre = getVal('contacto-nombre');
+ const tel = getVal('contacto-tel');
+ const email = getVal('contacto-email');
+ const mensaje = getVal('contacto-mensaje');
+ const motivoEl = document.querySelector('#page-contacto .motivo-btn.active');
+ const motivo = motivoEl ? motivoEl.textContent.trim() : '';
+
+ const lines = ['Hola, me gustaría más información.', ''];
+ if (motivo) lines.push(`Motivo: ${motivo}`);
+ if (nombre) lines.push(`Nombre: ${nombre}`);
+ if (tel) lines.push(`Teléfono: ${tel}`);
+ if (email) lines.push(`Correo: ${email}`);
+ if (mensaje) lines.push('', `Mensaje: ${mensaje}`);
+ return lines.join('\n');
+}
+
+function enviarContactoWA() {
+ const nombre = getVal('contacto-nombre');
+ const tel = getVal('contacto-tel');
+ const email = getVal('contacto-email');
+ const privEl = document.getElementById('priv2');
+
+ if (!nombre || !tel || !email) {
+ alert('Por favor completa nombre, teléfono y correo electrónico.');
+ return;
+ }
+ if (privEl && !privEl.checked) {
+ alert('Debes aceptar el Aviso de Privacidad para continuar.');
+ return;
+ }
+
+ window.open('https://wa.me/528117783953?text=' + encodeURIComponent(buildContactoMessage()), '_blank');
+ openModal('successModal');
+}
+
+function continuarContactoWA() {
+ window.open('https://wa.me/528117783953?text=' + encodeURIComponent(buildContactoMessage()), '_blank');
 }
 
 // ---- MOBILE MENU ----
@@ -4008,7 +4072,7 @@ const translations = {
  "Datos de navegación y uso del sitio web":"Browsing and website usage data",
  "Datos personales recabados":"Personal data collected","Finalidades del tratamiento":"Purpose of processing",
  "Responsable del tratamiento de datos":"Data controller","Derechos ARCO":"Data protection rights",
- "Rednorte Inmobiliaria, con domicilio en Av. José Vasconcelos Ote. 215, Local 7, Residencial San Agustín 1er Sector, San Pedro Garza García, Nuevo León, C.P. 66260, es responsable del uso y protección de sus datos personales.":"Rednorte Inmobiliaria, located at Av. José Vasconcelos Ote. 215, Local 7, Residencial San Agustín 1er Sector, San Pedro Garza García, Nuevo León, 66260, is responsible for the use and protection of your personal data.",
+ "Rednorte Inmobiliaria, con domicilio en Av. José Vasconcelos Ote. 215, Local-7, Residencial San Agustín 1er Sector, San Pedro Garza García, Nuevo León, C.P. 66260, es responsable del uso y protección de sus datos personales.":"Rednorte Inmobiliaria, located at Av. José Vasconcelos Ote. 215, Local-7, Residencial San Agustín 1er Sector, San Pedro Garza García, Nuevo León, 66260, is responsible for the use and protection of your personal data.",
  "Sus datos son utilizados para: atender solicitudes de información, valuación o contacto; enviar comunicaciones relacionadas con propiedades; mejorar nuestros servicios y cumplir con obligaciones legales aplicables.":"Your data is used to: handle requests for information, valuation, or contact; send property-related communications; improve our services; and comply with applicable legal obligations.",
  "Usted puede ejercer sus derechos de Acceso, Rectificación, Cancelación y Oposición enviando un correo a privacidad@rednorte.mx":"You may exercise your rights of Access, Rectification, Cancellation, and Objection by emailing privacidad@rednorte.mx",
  "Última actualización: enero 2024":"Last updated: January 2024","Acepto el":"I accept the",
