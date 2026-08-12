@@ -3193,9 +3193,11 @@ function propCard(p, onclick_) {
 // ---- GALERÍA FICHA INDIVIDUAL ----
 let fichaImgs = [];
 let fichaIdx = 0;
+let currentPropId = null;
 
 function openFicha(propId) {
  const p = properties.find(x => x.id === propId) || properties[0];
+ currentPropId = p.id;
  fichaImgs = (p.imgs && p.imgs.length > 0) ? p.imgs : [];
  fichaIdx = 0;
  renderFichaGallery(p);
@@ -3494,6 +3496,44 @@ function searchHeroProperties() {
 function setMotivo(el) {
  document.querySelectorAll('.motivo-btn').forEach(b => b.classList.remove('active'));
  el.classList.add('active');
+}
+
+// ---- CITA: enviar solicitud al asesor de la propiedad por WhatsApp ----
+function enviarCitaWA() {
+ const nombre = getVal('cita-nombre');
+ const tel = getVal('cita-tel');
+ const email = getVal('cita-email');
+ const fecha = getVal('cita-fecha');
+ const hora = getVal('cita-hora');
+ const comentarios = getVal('cita-comentarios');
+ const privEl = document.getElementById('cita-priv');
+
+ if (!nombre || !tel || !fecha || !hora) {
+ alert('Por favor completa nombre, teléfono, fecha y hora para agendar tu cita.');
+ return;
+ }
+ if (privEl && !privEl.checked) {
+ alert('Debes aceptar el Aviso de Privacidad para continuar.');
+ return;
+ }
+
+ const modalidadEl = document.querySelector('#page-cita .motivo-btn.active');
+ const modalidad = modalidadEl ? modalidadEl.textContent.trim() : 'Visita presencial';
+ const [y, m, d] = fecha.split('-');
+ const fechaFmt = (y && m && d) ? `${d}/${m}/${y}` : fecha;
+ const prop = properties.find(p => p.id === currentPropId);
+
+ const lines = ['Hola, quiero agendar una cita para conocer una propiedad.', ''];
+ if (prop) lines.push(`Propiedad: ${prop.title} (Ref: ${prop.id})`);
+ lines.push(`Fecha: ${fechaFmt}`, `Hora: ${hora}`, `Modalidad: ${modalidad}`, '', `Nombre: ${nombre}`, `Teléfono: ${tel}`);
+ if (email) lines.push(`Correo: ${email}`);
+ if (comentarios) lines.push('', `Comentarios: ${comentarios}`);
+
+ const phoneEl = document.getElementById('cita-advisor-phone');
+ const href = phoneEl ? phoneEl.getAttribute('href') || '' : '';
+ const advisorNumber = href.replace('tel:+', '').replace(/\D/g, '') || '528117783953';
+
+ window.open('https://wa.me/' + advisorNumber + '?text=' + encodeURIComponent(lines.join('\n')), '_blank');
 }
 
 // ---- MOBILE MENU ----
