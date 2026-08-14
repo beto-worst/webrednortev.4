@@ -4326,8 +4326,9 @@ function renderPropsPage(page) {
  if (totalPages <= 1) {
  pagEl.innerHTML = '';
  } else {
- let btns = `<button class="pag-btn" onclick="renderPropsPage(${propsCurrentPage - 1})" ${propsCurrentPage === 1 ? 'disabled' : ''}>‹</button>`;
- getPaginationItems(propsCurrentPage, totalPages).forEach(item => {
+ let btns = `<button class="pag-btn" onclick="renderPropsPage(${propsCurrentPage - 10})" ${propsCurrentPage <= 1 ? 'disabled' : ''} title="Retroceder 10 páginas">«</button>`;
+ btns += `<button class="pag-btn" onclick="renderPropsPage(${propsCurrentPage - 1})" ${propsCurrentPage === 1 ? 'disabled' : ''}>‹</button>`;
+ getPaginationItems(propsCurrentPage, totalPages, 4).forEach(item => {
  if (item === '...') {
  btns += `<span class="pag-ellipsis">…</span>`;
  } else {
@@ -4335,6 +4336,7 @@ function renderPropsPage(page) {
  }
  });
  btns += `<button class="pag-btn" onclick="renderPropsPage(${propsCurrentPage + 1})" ${propsCurrentPage === totalPages ? 'disabled' : ''}>›</button>`;
+ btns += `<button class="pag-btn" onclick="renderPropsPage(${propsCurrentPage + 10})" ${propsCurrentPage >= totalPages ? 'disabled' : ''} title="Adelantar 10 páginas">»</button>`;
  pagEl.innerHTML = btns;
  }
  }
