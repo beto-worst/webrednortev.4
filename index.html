@@ -4706,6 +4706,7 @@ function navTo(page) {
 
 // ---- INIT ----
 fetchLiveProperties();
+adjustCookieBannerSpacing();
 
 // ---- SEARCH TABS ----
 let heroSearchOp = 'Venta';
@@ -4859,7 +4860,15 @@ function closeModal(id) { document.getElementById(id).classList.remove('open'); 
 // ---- COOKIES ----
 function closeCookies() {
  document.getElementById('cookieBanner').style.display='none';
+ document.body.style.paddingBottom = '';
 }
+function adjustCookieBannerSpacing() {
+ const banner = document.getElementById('cookieBanner');
+ if (banner && banner.style.display !== 'none') {
+ document.body.style.paddingBottom = banner.offsetHeight + 'px';
+ }
+}
+window.addEventListener('resize', adjustCookieBannerSpacing);
 
 // Close modals on overlay click
 document.querySelectorAll('.modal-overlay').forEach(m => {
