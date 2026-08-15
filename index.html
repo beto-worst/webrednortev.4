@@ -4699,7 +4699,7 @@ function navTo(page) {
  });
  const navHerramientas = document.getElementById('nav-herramientas');
  if (navHerramientas) navHerramientas.classList.toggle('active', page==='herramientas' || page==='valuacion' || page==='vendibilidad');
- window.scrollTo({top:0,behavior:'smooth'});
+ window.scrollTo(0, 0);
  if (page==='propiedades') renderPropsPage(1);
  if (page==='ficha') renderProps('similar-props', 3);
 }
