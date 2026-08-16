@@ -4,12 +4,7 @@
 // el CRM (api/asesores-data.json). Actualízala reemplazando ese archivo con
 // una exportación más reciente cuando cambien asignaciones.
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const asesoresData = JSON.parse(fs.readFileSync(path.join(__dirname, 'asesores-data.json'), 'utf8'));
+import asesoresData from './asesores-data.json';
 
 export default async function handler(req, res) {
   const code = String(req.query.code || '').trim().toUpperCase();
