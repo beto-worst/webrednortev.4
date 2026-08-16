@@ -11,12 +11,16 @@ export default async function handler(req, res) {
   }
 
   const candidates = [
-    { method: 'GET', url: `https://api.nocnok.com/v1/sites/properties/${code}` },
-    { method: 'GET', url: `https://api.nocnok.com/v1/sites/properties/${code}/agent` },
-    { method: 'GET', url: `https://api.nocnok.com/v1/sites/agents` },
-    { method: 'GET', url: `https://api.nocnok.com/v1/sites/members` },
-    { method: 'GET', url: `https://api.nocnok.com/v1/agents` },
-    { method: 'GET', url: `https://api.nocnok.com/v1/sites/properties/${code}/agents` }
+    { method: 'GET', url: `https://api.nocnok.com/v1/sites/members?accountId=163221` },
+    { method: 'GET', url: `https://api.nocnok.com/v1/sites/brokers` },
+    { method: 'GET', url: `https://api.nocnok.com/v1/sites/users` },
+    { method: 'GET', url: `https://api.nocnok.com/v1/sites/team` },
+    { method: 'GET', url: `https://api.nocnok.com/v1/sites/properties/${code}?include=agent` },
+    { method: 'GET', url: `https://api.nocnok.com/v1/sites/properties/${code}?expand=agent` },
+    { method: 'GET', url: `https://api.nocnok.com/v1/sites/properties/${code}/broker` },
+    { method: 'GET', url: `https://api.nocnok.com/v1/sites/properties/${code}/owner` },
+    { method: 'GET', url: `https://api.nocnok.com/v1/crm/163221/members` },
+    { method: 'GET', url: `https://api.nocnok.com/v1/sites/163221/members` }
   ];
 
   const results = [];
