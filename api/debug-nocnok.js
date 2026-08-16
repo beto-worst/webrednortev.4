@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     try {
       const r = await fetch(c.url, { method: c.method, headers: { 'x-api-key': apiKey, 'Content-Type': 'application/json' } });
       const text = await r.text();
-      results.push({ url: c.url, status: r.status, bodyPreview: text.slice(0, 500) });
+      results.push({ url: c.url, status: r.status, bodyPreview: text.slice(0, 4000) });
     } catch (err) {
       results.push({ url: c.url, error: String(err) });
     }
