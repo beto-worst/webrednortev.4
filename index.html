@@ -4782,6 +4782,17 @@ function enviarCitaWA() {
  const href = phoneEl ? phoneEl.getAttribute('href') || '' : '';
  const advisorNumber = href.replace('tel:+', '').replace(/\D/g, '') || '528117783953';
 
+ if (prop) {
+ fetch('/api/contactar-agente', {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify({
+ propertyCode: prop.id,
+ client: { name: nombre, email: email, phone: tel, message: `Cita: ${fechaFmt} ${hora} (${modalidad}). ${comentarios || ''}`.trim() }
+ })
+ }).catch(() => {});
+ }
+
  window.open('https://wa.me/' + advisorNumber + '?text=' + encodeURIComponent(lines.join('\n')), '_blank');
 }
 
