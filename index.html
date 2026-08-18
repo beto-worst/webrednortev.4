@@ -1485,7 +1485,7 @@ body{top:0 !important;}
  <button class="btn-wa-big" onclick="navTo('cita')" style="background:var(--vino);margin-bottom:0.75rem;">
  Hacer una cita
  </button>
- <button class="btn-share">↗ Compartir propiedad</button>
+ <button class="btn-share" onclick="compartirPropiedad(this)">↗ Compartir propiedad</button>
  <div style="border-top:1px solid var(--gris-claro);margin-top:1.25rem;padding-top:1.25rem;">
  <p style="font-size:11px;font-weight:700;color:var(--gris-medio);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.5rem;">Referencia</p>
  <p style="font-size:13px;color:var(--cafe);">Código: <strong>RN-1482</strong></p>
@@ -4417,6 +4417,34 @@ function openFicha(propId) {
  navTo('ficha');
 }
 
+// ---- COMPARTIR PROPIEDAD ----
+async function compartirPropiedad(btnEl) {
+ const p = properties.find(x => x.id === currentPropId);
+ const title = p ? p.title : 'Rednorte Inmobiliaria';
+ const text = p ? `Mira esta propiedad: ${p.title} — ${p.price}` : 'Mira esta propiedad en Rednorte Inmobiliaria';
+ const url = window.location.href;
+
+ if (navigator.share) {
+ try {
+ await navigator.share({ title, text, url });
+ } catch (err) {
+ // El usuario canceló el diálogo de compartir; no hacer nada.
+ }
+ return;
+ }
+
+ try {
+ await navigator.clipboard.writeText(`${text}\n${url}`);
+ if (btnEl) {
+ const original = btnEl.textContent;
+ btnEl.textContent = '✓ Enlace copiado';
+ setTimeout(() => { btnEl.textContent = original; }, 2000);
+ }
+ } catch (err) {
+ alert('No se pudo copiar el enlace. Copia la URL manualmente desde la barra de direcciones.');
+ }
+}
+
 // ---- ASESOR REAL DE LA PROPIEDAD (vía NOCNOK) ----
 let advisorRequestToken = 0;
 
@@ -5158,7 +5186,7 @@ document.querySelectorAll('.modal-overlay').forEach(m => {
  </div>
  </div>
  <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,0.08);max-width:1200px;margin:0 auto;padding:1.25rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
- <p style="font-size:12px;color:rgba(255,255,255,0.4);">© 2024 Rednorte Inmobiliaria. Todos los derechos reservados.</p>
+ <p style="font-size:12px;color:rgba(255,255,255,0.4);">© 2026 Rednorte Inmobiliaria. Todos los derechos reservados.</p>
  <div style="display:flex;gap:1.25rem;">
  <a style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;cursor:pointer;" onclick="navTo('aviso')">Aviso de privacidad</a>
  <a style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;cursor:pointer;" onclick="navTo('terminos')">Términos y condiciones</a>
@@ -5271,7 +5299,7 @@ const translations = {
  "¡Mensaje enviado!":"Message sent!","Dirección":"Address",
 
  // Footer
- "© 2024 Rednorte Inmobiliaria. Todos los derechos reservados.":"© 2024 Rednorte Inmobiliaria. All rights reserved.",
+ "© 2026 Rednorte Inmobiliaria. Todos los derechos reservados.":"© 2026 Rednorte Inmobiliaria. All rights reserved.",
  "Aviso de Privacidad":"Privacy Notice","Aviso de privacidad":"Privacy notice",
  "Política de Cookies":"Cookie Policy","Política de cookies":"Cookie policy",
  "Términos y condiciones":"Terms and conditions",
