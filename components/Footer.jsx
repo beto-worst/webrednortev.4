@@ -72,7 +72,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', maxWidth: '1200px', margin: '0 auto', padding: '1.25rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
-        <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)' }}>© 2024 Rednorte Inmobiliaria. Todos los derechos reservados.</p>
+        <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)' }}>© 2026 Rednorte Inmobiliaria. Todos los derechos reservados.</p>
         <div style={{ display: 'flex', gap: '1.25rem' }}>
           <Link style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', textDecoration: 'none' }} href="/aviso-de-privacidad">Aviso de privacidad</Link>
           <Link style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', textDecoration: 'none' }} href="/terminos-y-condiciones">Términos y condiciones</Link>
