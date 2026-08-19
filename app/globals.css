@@ -967,8 +967,8 @@ footer { background: var(--negro); color: rgba(255,255,255,0.7); }
 
 /* Estilos de la herramienta de valuación (escopados bajo .ov-valuacion) */
 :root{
-  --navy:#3c3429;--navy-mid:#4e4438;--navy-light:#5e5248;
-  --orange:#48171b;--orange-light:#6b2227;--orange-pale:#f5ede9;
+  --navy:#4A3728;--navy-mid:#5c4736;--navy-light:#6e5847;
+  --orange:#C4622D;--orange-light:#d47a45;--orange-pale:#f5ede4;
   --yellow:#f2ed99;
   --white:#FFFFFF;--off-white:#efece8;
   --gray-100:#dfdcd7;--gray-200:#d2c7b3;--gray-400:#7c7b67;--gray-600:#5a5748;--gray-800:#111111;
