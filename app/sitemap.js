@@ -4,6 +4,7 @@
 // and their [slug] children are intentionally excluded, since they carry
 // robots: { index: false } in their own metadata.
 import { fetchAllProperties } from '@/lib/properties';
+import { buildPropertySlug } from '@/lib/slug';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.rednorte.mx';
 
@@ -36,7 +37,7 @@ export default async function sitemap() {
     const { properties, source } = await fetchAllProperties();
     if (source === 'live') {
       propertyEntries = properties.map((p) => ({
-        url: `${SITE_URL}/propiedad/${p.id}`,
+        url: `${SITE_URL}/propiedades/${buildPropertySlug(p)}`,
         lastModified: new Date(),
       }));
     }

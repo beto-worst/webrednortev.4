@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 
 const NAV_LINKS = [
   { href: '/', label: 'Inicio', match: (p) => p === '/' },
-  { href: '/propiedades', label: 'Propiedades', match: (p) => p.startsWith('/propiedades') || p.startsWith('/propiedad/') },
+  { href: '/propiedades', label: 'Propiedades', match: (p) => p.startsWith('/propiedades') },
   // Servicios oculto temporalmente del nav principal hasta tener el contenido listo (igual que en el sitio original).
   { href: '/herramientas', label: 'Herramientas', match: (p) => p.startsWith('/herramientas') },
   { href: '/nosotros', label: 'Nosotros', match: (p) => p.startsWith('/nosotros') },

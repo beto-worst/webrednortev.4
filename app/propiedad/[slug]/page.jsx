@@ -1,109 +1,20 @@
-import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import Breadcrumb from '@/components/Breadcrumb';
-import PropertyGallery from '@/components/PropertyGallery';
-import PropertySidebar from '@/components/PropertySidebar';
-import PropertyCard from '@/components/PropertyCard';
+import { redirect, notFound } from 'next/navigation';
 import { fetchAllProperties, findPropertyById } from '@/lib/properties';
-import { getAdvisorForProperty, defaultAdvisor } from '@/lib/advisor';
+import { buildPropertySlug, extractCodeFromSlug } from '@/lib/slug';
 
-export async function generateMetadata({ params }) {
+// Legacy route (singular "/propiedad/{code}", used briefly right after the
+// Next.js migration). Kept only as a permanent redirect to the new
+// "/propiedades/{slug-descriptivo}-{codigo}" URL, so any link already
+// shared or indexed under the old pattern keeps working instead of 404ing.
+export default async function LegacyPropiedadRedirect({ params }) {
   const { slug } = await params;
+  const code = extractCodeFromSlug(slug);
   const { properties } = await fetchAllProperties();
-  const property = findPropertyById(properties, slug);
-
-  if (!property) {
-    return { title: 'Propiedad no encontrada' };
-  }
-
-  const title = `${property.title} en ${property.op} · ${property.zone}`;
-  const description = (property.description || `${property.title} en ${property.op.toLowerCase()} en ${property.zone}. ${property.price}.`).slice(0, 160);
-  const ogImage = property.imgs && property.imgs[0];
-
-  return {
-    title,
-    description,
-    alternates: { canonical: `/propiedad/${property.id}` },
-    openGraph: {
-      title,
-      description,
-      images: ogImage ? [{ url: ogImage }] : undefined,
-    },
-  };
-}
-
-export default async function PropiedadPage({ params }) {
-  const { slug } = await params;
-  const { properties } = await fetchAllProperties();
-  const property = findPropertyById(properties, slug);
+  const property = findPropertyById(properties, code);
 
   if (!property) {
     notFound();
   }
 
-  const advisor = (await getAdvisorForProperty(property.id)) || defaultAdvisor();
-  const similar = properties.filter((p) => p.id !== property.id && p.category === property.category).slice(0, 3);
-  const isRenta = property.op === 'Renta';
-
-  const feats = [
-    { val: property.rooms, name: 'Recámaras' },
-    { val: property.baths, name: 'Baños' },
-    { val: property.parking, name: 'Estacionamientos' },
-    { val: property.lotSize ? `${property.lotSize} m²` : '—', name: 'Terreno' },
-    { val: property.constructionSize ? `${property.constructionSize} m²` : '—', name: 'Construcción' },
-    { val: property.municipio || (property.zone || '').split(',')[0], name: 'Municipio' },
-  ];
-
-  return (
-    <div className="page-content">
-      <Breadcrumb items={[{ label: 'Propiedades', href: '/propiedades' }, { label: property.title }]} />
-      <div className="prop-detail">
-        <div className="prop-detail-grid">
-          <div>
-            <PropertyGallery imgs={property.imgs} icon={property.icon} title={property.title} />
-            <div className="prop-info" style={{ marginTop: '2rem' }}>
-              <div className="prop-detail-badge"> {property.type} en {property.op}</div>
-              <h1 className="prop-detail-title">{property.title}</h1>
-              <p className="prop-detail-code"> Referencia CRM: <strong>{property.id}</strong> &nbsp;·&nbsp; <span className="crm-tag" style={{ float: 'none', display: 'inline-flex' }}><span className="crm-dot"></span> Activo en CRM</span></p>
-              <div className="prop-detail-price">{property.price}</div>
-              <p className="prop-detail-price-sub">{isRenta ? 'Precio mensual' : 'Precio de venta'} · {property.type}</p>
-              <div className="prop-features-grid">
-                {feats.map((f) => (
-                  <div className="prop-feature-item" key={f.name}>
-                    <div className="prop-feature-val">{f.val}</div>
-                    <div className="prop-feature-name">{f.name}</div>
-                  </div>
-                ))}
-              </div>
-              <p className="prop-section-title">Descripción</p>
-              <p className="prop-description">{property.description || 'Sin descripción disponible.'}</p>
-              <p className="prop-section-title">Amenidades</p>
-              <div className="amenities-list">
-                {property.features && property.features.length > 0 ? (
-                  property.features.slice(0, 10).map((f, i) => <span className="amenity-chip" key={i}>{f}</span>)
-                ) : (
-                  <span className="amenity-chip">Sin amenidades registradas</span>
-                )}
-              </div>
-              <p className="prop-section-title">Ubicación aproximada</p>
-              <div className="prop-map">
-                <span style={{ fontSize: '2rem' }}></span>
-                <span>{property.zone}</span>
-                <span style={{ fontSize: '11px', color: '#3d8a3d' }}>Mapa integrado con Google Maps</span>
-              </div>
-              {similar.length > 0 && (
-                <>
-                  <p className="prop-section-title">Propiedades similares</p>
-                  <div className="props-grid" style={{ gridTemplateColumns: 'repeat(auto-fill,minmax(260px,1fr))' }}>
-                    {similar.map((p) => <PropertyCard key={p.id} property={p} />)}
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-          <PropertySidebar property={property} advisor={advisor} />
-        </div>
-      </div>
-    </div>
-  );
+  redirect(`/propiedades/${buildPropertySlug(property)}`);
 }

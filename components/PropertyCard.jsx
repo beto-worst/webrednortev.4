@@ -2,13 +2,15 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { buildPropertySlug } from '@/lib/slug';
 
 // Ported from the legacy cardCarousel()/propCard() functions. The whole
-// card is now a real <a href="/propiedad/CODE"> (via next/link) instead of
-// a div with an onclick handler, so every listing is a crawlable URL from
-// /propiedades. The per-card image carousel controls are plain <span>s
-// (not <button>s) so they can legally nest inside the <a>; they still
-// stopPropagation + preventDefault so clicking them doesn't navigate.
+// card is now a real <a href="/propiedades/{slug-descriptivo}-CODE"> (via
+// next/link) instead of a div with an onclick handler, so every listing is
+// a crawlable URL from /propiedades. The per-card image carousel controls
+// are plain <span>s (not <button>s) so they can legally nest inside the
+// <a>; they still stopPropagation + preventDefault so clicking them
+// doesn't navigate.
 export default function PropertyCard({ property }) {
   const [idx, setIdx] = useState(0);
   const p = property;
@@ -28,7 +30,7 @@ export default function PropertyCard({ property }) {
   };
 
   return (
-    <Link href={`/propiedad/${encodeURIComponent(p.id)}`} className="prop-card" style={{ overflow: 'hidden' }}>
+    <Link href={`/propiedades/${buildPropertySlug(p)}`} className="prop-card" style={{ overflow: 'hidden' }}>
       <div className="prop-img" style={{ padding: 0, height: 'auto', background: 'none', position: 'relative' }}>
         {!hasImgs ? (
           <div className="card-carousel">

@@ -7,7 +7,7 @@ import { formatMxPhone, advisorInitials } from '@/lib/format';
 // Ported from the legacy page-cita section (index.html lines ~4912-5013) and
 // its enviarCitaWA(). Per the migration plan this is NOT its own route —
 // "Hacer una cita" only makes sense in the context of a specific property,
-// so it's rendered inline inside app/propiedad/[slug]/page.jsx instead.
+// so it's rendered inline inside app/propiedades/[slug]/page.jsx instead.
 export default function CitaSection({ property, advisor }) {
   const [nombre, setNombre] = useState('');
   const [tel, setTel] = useState('');
