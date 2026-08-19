@@ -6,6 +6,9 @@ import PropertyCard from '@/components/PropertyCard';
 import { fetchAllProperties, findPropertyById } from '@/lib/properties';
 import { getAdvisorForProperty, defaultAdvisor } from '@/lib/advisor';
 import { buildPropertySlug, extractCodeFromSlug } from '@/lib/slug';
+import { propertyListingSchema, breadcrumbSchema } from '@/lib/schema';
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.rednorte.mx';
 
 // The URL is /propiedades/{palabras-descriptivas}-{CODIGO} — only the code
 // at the end is ever used to look the property up (see lib/slug.js). This
@@ -63,9 +66,20 @@ export default async function PropiedadPage({ params }) {
     { val: property.municipio || (property.zone || '').split(',')[0], name: 'Municipio' },
   ];
 
+  const breadcrumbItems = [{ label: 'Propiedades', href: '/propiedades' }, { label: property.title }];
+  const canonicalUrl = `${SITE_URL}/propiedades/${buildPropertySlug(property)}`;
+
   return (
     <div className="page-content">
-      <Breadcrumb items={[{ label: 'Propiedades', href: '/propiedades' }, { label: property.title }]} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(propertyListingSchema(property, canonicalUrl)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema(breadcrumbItems)) }}
+      />
+      <Breadcrumb items={breadcrumbItems} />
       <div className="prop-detail">
         <div className="prop-detail-grid">
           <div>
