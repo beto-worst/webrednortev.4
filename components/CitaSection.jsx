@@ -50,6 +50,19 @@ export default function CitaSection({ property, advisor }) {
       }).catch(() => {});
     }
 
+    fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tipo: 'Cita agendada',
+        nombre,
+        telefono: tel,
+        email,
+        detalle: property ? `${property.title} (Ref: ${property.id})` : '',
+        notas: `${fechaFmt} ${hora} · ${modalidad}. ${comentarios || ''}`.trim(),
+      }),
+    }).catch(() => {});
+
     window.open('https://wa.me/' + advisorNumber + '?text=' + encodeURIComponent(lines.join('\n')), '_blank');
   };
 

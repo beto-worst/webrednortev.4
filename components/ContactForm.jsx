@@ -34,6 +34,12 @@ export default function ContactForm() {
       alert('Debes aceptar el Aviso de Privacidad para continuar.');
       return;
     }
+    fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tipo: 'Contacto general', nombre, telefono: tel, email, detalle: motivo, notas: mensaje }),
+    }).catch(() => {});
+
     window.open('https://wa.me/528117783953?text=' + encodeURIComponent(buildMessage()), '_blank');
     openModal('successModal');
   };
