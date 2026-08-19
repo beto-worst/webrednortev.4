@@ -1,4 +1,4 @@
-import { redirect, notFound } from 'next/navigation';
+import { permanentRedirect, notFound } from 'next/navigation';
 import { fetchAllProperties, findPropertyById } from '@/lib/properties';
 import { buildPropertySlug, extractCodeFromSlug } from '@/lib/slug';
 
@@ -16,5 +16,5 @@ export default async function LegacyPropiedadRedirect({ params }) {
     notFound();
   }
 
-  redirect(`/propiedades/${buildPropertySlug(property)}`);
+  permanentRedirect(`/propiedades/${buildPropertySlug(property)}`);
 }
