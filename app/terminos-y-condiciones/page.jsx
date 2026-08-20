@@ -16,7 +16,7 @@ export default function TerminosPage() {
         <p className="legal-date">Última actualización: 13 de agosto de 2026</p>
         <div className="legal-section">
           <p>Los presentes Términos y Condiciones regulan el acceso, navegación y uso del sitio web rednorte.mx, así como de las páginas, herramientas, formularios, contenidos y funcionalidades relacionadas con el mismo.</p>
-          <p>El sitio es operado por Red de Administración y Compraventa, S.A. de C.V., bajo el nombre comercial Rednorte Inmobiliaria, con RFC RAC230525TH3, con domicilio en Av. José Vasconcelos Ote. 215, Local 7, Residencial San Agustín 1er Sector, C.P. 66260, San Pedro Garza García, Nuevo León.</p>
+          <p>El sitio es operado por Red de Administración y Compraventa, S.A. de C.V., bajo el nombre comercial Rednorte Inmobiliaria, con RFC RAC230525TH3, con domicilio en Av. José Vasconcelos Ote. 215-7, Residencial San Agustín 1er Sector, C.P. 66260, San Pedro Garza García, Nuevo León.</p>
           <p>Al acceder y utilizar este sitio, el usuario reconoce haber leído los presentes Términos y Condiciones. Cuando una funcionalidad, herramienta o servicio requiera aceptación expresa de condiciones adicionales, éstas serán presentadas al usuario antes de utilizarla.</p>
         </div>
         <div className="legal-section">
@@ -167,7 +167,7 @@ export default function TerminosPage() {
           <ul>
             <li><strong>Responsable:</strong> Red de Administración y Compraventa, S.A. de C.V.</li>
             <li><strong>Nombre comercial:</strong> Rednorte Inmobiliaria</li>
-            <li><strong>Domicilio:</strong> Av. José Vasconcelos Ote. 215, Local 7, Residencial San Agustín 1er Sector, C.P. 66260, San Pedro Garza García, Nuevo León.</li>
+            <li><strong>Domicilio:</strong> Av. José Vasconcelos Ote. 215-7, Residencial San Agustín 1er Sector, C.P. 66260, San Pedro Garza García, Nuevo León.</li>
             <li><strong>Teléfono:</strong> +52 81 1778 3953</li>
             <li><strong>Correo electrónico:</strong> admin@rednorte.com.mx</li>
             <li><strong>Sitio web:</strong> rednorte.mx</li>

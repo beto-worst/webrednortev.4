@@ -14,7 +14,7 @@ export default function AvisoPrivacidadPage() {
         <h1>Aviso de Privacidad Integral</h1>
         <p className="legal-date">Última actualización: 8 de julio de 2026</p>
         <div className="legal-section">
-          <p>En cumplimiento con lo dispuesto por la Ley Federal de Protección de Datos Personales en Posesión de los Particulares y demás disposiciones aplicables, Red de Administración y Compraventa, S.A. de C.V., bajo el nombre comercial Rednorte Inmobiliaria, con RFC RAC230525TH3, con domicilio en Av. José Vasconcelos Ote. 215, Local 7, Residencial San Agustín 1er Sector, C.P. 66260, San Pedro Garza García, Nuevo León, es responsable del uso, tratamiento, protección y resguardo de sus datos personales.</p>
+          <p>En cumplimiento con lo dispuesto por la Ley Federal de Protección de Datos Personales en Posesión de los Particulares y demás disposiciones aplicables, Red de Administración y Compraventa, S.A. de C.V., bajo el nombre comercial Rednorte Inmobiliaria, con RFC RAC230525TH3, con domicilio en Av. José Vasconcelos Ote. 215-7, Residencial San Agustín 1er Sector, C.P. 66260, San Pedro Garza García, Nuevo León, es responsable del uso, tratamiento, protección y resguardo de sus datos personales.</p>
           <p>Para efectos del presente Aviso de Privacidad, el titular de los datos personales podrá ser cualquier persona física que tenga contacto con Rednorte Inmobiliaria o con sus asesores, incluyendo, de manera enunciativa más no limitativa, propietarios, vendedores, compradores, arrendadores, arrendatarios, prospectos, clientes, asesores, aliados comerciales, representantes legales, apoderados o cualquier tercero relacionado con una operación inmobiliaria.</p>
         </div>
         <div className="legal-section">
@@ -90,7 +90,7 @@ export default function AvisoPrivacidadPage() {
             <li><strong>Responsable:</strong> Red de Administración y Compraventa, S.A. de C.V.</li>
             <li><strong>Nombre comercial:</strong> Rednorte Inmobiliaria</li>
             <li><strong>RFC:</strong> RAC230525TH3</li>
-            <li><strong>Domicilio:</strong> Av. José Vasconcelos Ote. 215, Local 7, Residencial San Agustín 1er Sector, C.P. 66260, San Pedro Garza García, Nuevo León.</li>
+            <li><strong>Domicilio:</strong> Av. José Vasconcelos Ote. 215-7, Residencial San Agustín 1er Sector, C.P. 66260, San Pedro Garza García, Nuevo León.</li>
             <li><strong>Teléfono:</strong> 8117783953</li>
             <li><strong>Correo electrónico:</strong> admin@rednorte.com.mx</li>
             <li><strong>Sitio web:</strong> rednorte.mx</li>

@@ -25,7 +25,7 @@ export default function Footer() {
             </div>
           </div>
           <p className="footer-desc">Especialistas en venta, renta e inversión inmobiliaria en Monterrey y Nuevo León. Conectamos propiedades con decisiones inteligentes.</p>
-          <p className="footer-address"> Av. José Vasconcelos Ote. 215, Local-7<br />Residencial San Agustín 1er Sector<br />San Pedro Garza García, N.L. 66260</p>
+          <p className="footer-address"> Av. José Vasconcelos Ote. 215-7<br />Residencial San Agustín 1er Sector<br />San Pedro Garza García, N.L. 66260</p>
           <div className="footer-social">
             <a className="social-btn" href="https://www.facebook.com/rednorteinmobiliaria/" target="_blank" rel="noopener noreferrer" title="Facebook">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.505 17.523 2 12 2S2 6.505 2 12.06c0 5.02 3.657 9.184 8.438 9.94v-7.03H7.898v-2.91h2.54V9.845c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.459h-1.26c-1.243 0-1.63.771-1.63 1.562v1.877h2.773l-.443 2.91h-2.33V22c4.78-.756 8.437-4.92 8.437-9.94z" /></svg>

@@ -155,7 +155,7 @@ export default function PoliticaCookiesPage() {
           <ul>
             <li><strong>Responsable:</strong> Red de Administración y Compraventa, S.A. de C.V.</li>
             <li><strong>Nombre comercial:</strong> Rednorte Inmobiliaria</li>
-            <li><strong>Domicilio:</strong> Av. José Vasconcelos Ote. 215, Local 7, Residencial San Agustín 1er Sector, C.P. 66260, San Pedro Garza García, Nuevo León.</li>
+            <li><strong>Domicilio:</strong> Av. José Vasconcelos Ote. 215-7, Residencial San Agustín 1er Sector, C.P. 66260, San Pedro Garza García, Nuevo León.</li>
             <li><strong>Teléfono:</strong> +52 81 1778 3953</li>
             <li><strong>Correo electrónico:</strong> admin@rednorte.com.mx</li>
             <li><strong>Sitio web:</strong> rednorte.mx</li>
